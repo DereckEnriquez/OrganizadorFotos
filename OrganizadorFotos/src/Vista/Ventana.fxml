@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VentanaController">
+   <children>
+      <Button fx:id="btnsi" layoutX="157.0" layoutY="163.0" mnemonicParsing="false" onAction="#initialize1" text="Si" />
+      <Button fx:id="btnno" layoutX="391.0" layoutY="163.0" mnemonicParsing="false" onAction="#initialize2" text="No" />
+      <TextField fx:id="texto" layoutX="219.0" layoutY="85.0" />
+   </children>
+</AnchorPane>
