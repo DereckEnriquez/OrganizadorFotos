@@ -1,24 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controlador;
 
 import Modelo.CircularDoubleLinkedList;
 import Modelo.Foto;
 import java.io.File;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -32,22 +36,27 @@ public class VentanaController implements Initializable {
 
     @FXML
     private Pane panel;
+
     @FXML
-    private ImageView imageview;
+    private MenuItem btnImportar;
+
+    Stage stage = new Stage();
+    @FXML
+    private HBox hbGaleria;
+    @FXML
+    private VBox vbTitulos;
 
     @FXML
     private void crearalbum(ActionEvent event) {
         System.out.println("clic crear menu");
-        CircularDoubleLinkedList<Foto> album = new CircularDoubleLinkedList<>();
-        File archivo = exploradorArchivo.showOpenDialog(new Stage());
-        Foto foto = new Foto( archivo.getName(),archivo.toPath());
-        System.out.println(foto);
-        /*Image imagen= new Image(foto.getDireccion().toString());
-        album.addFirst(foto);
-        imageview.setImage(imagen);
-        panel.getChildren().addAll(imageview);*/
-        album.addLast(foto);
-        System.out.println("***ALBUM CREADO:\n***"+album);
+
+        String nombre = JOptionPane.showInputDialog("Nombre del Album:");
+
+        JOptionPane.showMessageDialog(null, "Album " + nombre + " creado con exito!");
+        CircularDoubleLinkedList<Foto> album = new CircularDoubleLinkedList(nombre);
+        System.out.println("ALBUM CREADO: " + album.getNombreAlbum());
+        
+
     }
 
     @FXML
@@ -58,6 +67,37 @@ public class VentanaController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         exploradorArchivo.setInitialDirectory(new File("C:"));
+
+    }
+
+    @FXML
+    private void importarFoto() {
+        btnImportar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.setTitle("Buscar Imagen");
+
+                // Agregar filtros para facilitar la busqueda
+                fileChooser.getExtensionFilters().addAll(
+                        new FileChooser.ExtensionFilter("All Images", "*.*"),
+                        new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                        new FileChooser.ExtensionFilter("PNG", "*.png")
+                );
+
+                // Obtener la imagen seleccionada
+                //File imgFile = fileChooser.showOpenDialog(stage);
+                //CircularDoubleLinkedList<Foto> list = (CircularDoubleLinkedList<Foto>) fileChooser.showOpenMultipleDialog(stage);
+                List<File> list = fileChooser.showOpenMultipleDialog(stage);
+                // Mostar la imagen
+                for (int i = 0; i < list.size(); i++) {
+                    if (list != null) {
+                        Image image = new Image("file:" + list.get(i).getAbsolutePath());
+
+                    }
+                }
+            }
+        });
     }
 
 }

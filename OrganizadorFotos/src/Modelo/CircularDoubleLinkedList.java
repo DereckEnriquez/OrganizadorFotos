@@ -1,4 +1,3 @@
-
 package Modelo;
 
 /**
@@ -6,63 +5,78 @@ package Modelo;
  * @author Danilo Torres Vera
  */
 public class CircularDoubleLinkedList<E> implements List<E> {
-    
+
+    private String nombreAlbum;
     private Node<E> last;
     private int tam;
-    
-    private class Node<E>
-    {
+
+    private class Node<E> {
+
         private E datos;
         private Node<E> sig;
         private Node<E> ant;
-        
-        public Node(E datos)
-        {
+
+        public Node(E datos) {
             this.datos = datos;
             this.sig = null;
             this.ant = null;
         }
-       
+
     }
+
     public CircularDoubleLinkedList() {
         last = null;
-        tam =0;
+        tam = 0;
     }
+
+    public CircularDoubleLinkedList(String nombreAlbum) {
+        this.nombreAlbum = nombreAlbum;
+        last = null;
+        tam = 0;
+    }
+
+    public String getNombreAlbum() {
+        return nombreAlbum;
+    }
+
+    public void setNombreAlbum(String nombreAlbum) {
+        this.nombreAlbum = nombreAlbum;
+    }
+    
+   
 
     @Override
     public boolean addFirst(E e) {
-        if(e==null) {
+        if (e == null) {
             return false;
         }
         Node<E> node = new Node(e);
-        if(isEmpty()) {
-            last = node; 
-            last.sig=node;
-        }
-        else{
+        if (isEmpty()) {
+            last = node;
+            last.sig = node;
+        } else {
             Node<E> second = last.sig;
             last.sig = node;
             node.sig = second;
-            second.ant=node;
-            node.ant= last;
+            second.ant = node;
+            node.ant = last;
         }
-        tam ++;
+        tam++;
         return true;
     }
 
     @Override
     public boolean addLast(E e) {
-        if(e==null) {
+        if (e == null) {
             return false;
         }
         Node<E> node = new Node(e);
-        if(isEmpty()) {
+        if (isEmpty()) {
             last = last.sig = node;
-        }
-        else{
+        } else {
             node.ant = last;
             Node<E> node1 = last.sig;
-            node.sig=node1;
+            node.sig = node1;
             node1.ant = node;
             last.sig = node;
             last = node;
@@ -73,7 +87,7 @@ public class CircularDoubleLinkedList<E> implements List<E> {
 
     @Override
     public E getFirst() {
-        if(isEmpty()) {
+        if (isEmpty()) {
             throw new IllegalStateException("La lista que selecciono esta vacía");
         }
         return last.sig.datos;
@@ -81,7 +95,7 @@ public class CircularDoubleLinkedList<E> implements List<E> {
 
     @Override
     public E getLast() {
-        if(isEmpty()) {
+        if (isEmpty()) {
             throw new IllegalStateException("La lista está vacía");
         }
         return last.datos;
@@ -89,17 +103,18 @@ public class CircularDoubleLinkedList<E> implements List<E> {
 
     @Override
     public int indexOf(E e) {
-        if(e==null) 
+        if (e == null) {
             return -1;
-        if(isEmpty()) {
+        }
+        if (isEmpty()) {
             return -1;
         }
         Node<E> node = last.sig;
-        for(int i = 0;i<tam;i++){
-            if(node.datos.equals(e)){
+        for (int i = 0; i < tam; i++) {
+            if (node.datos.equals(e)) {
                 return i;
             }
-            node=node.sig;
+            node = node.sig;
         }
         return -1;
     }
@@ -111,19 +126,18 @@ public class CircularDoubleLinkedList<E> implements List<E> {
 
     @Override
     public boolean removeLast() {
-        if(isEmpty()) {
+        if (isEmpty()) {
             return false;
         }
         last.datos = null;
-        if(tam ==1) {
+        if (tam == 1) {
             last = null;
-        }
-        else{
+        } else {
             Node<E> node = last.ant;
             Node<E> node1 = last.sig;
-            node.sig= node1;
+            node.sig = node1;
             node1.ant = node;
-            last.sig =last.ant = null;
+            last.sig = last.ant = null;
             last = node;
         }
         tam--;
@@ -132,41 +146,41 @@ public class CircularDoubleLinkedList<E> implements List<E> {
 
     @Override
     public boolean removeFirst() {
-        if(isEmpty()) {
+        if (isEmpty()) {
             return false;
-        }        
-        if(tam ==1){
+        }
+        if (tam == 1) {
             last.datos = null;
             last = last.sig = last.ant = null;
-        }
-        else{
+        } else {
             Node<E> eliminar = last.sig;
             Node<E> newNode = eliminar.sig;
             last.sig = newNode;
             newNode.ant = last;
-            eliminar.sig =eliminar.ant = null; 
+            eliminar.sig = eliminar.ant = null;
             eliminar.datos = null;
-            
+
         }
-        tam --;
+        tam--;
         return true;
     }
-     public Node<E> getNode(int index){
-        if(index== 0) {
+
+    public Node<E> getNode(int index) {
+        if (index == 0) {
             return last.sig;
         }
-        if(index==tam-1) {
+        if (index == tam - 1) {
             return last;
         }
         Node<E> node;
-        if(index<tam/2){
-            node=last.sig;
-            for(int i =0;i<index;i++){
-                node=node.sig;
+        if (index < tam / 2) {
+            node = last.sig;
+            for (int i = 0; i < index; i++) {
+                node = node.sig;
             }
-        }else{
-            node=last;
-            for(int i = tam-1;i> index; i--){
+        } else {
+            node = last;
+            for (int i = tam - 1; i > index; i--) {
                 node = node.ant;
             }
         }
@@ -175,13 +189,13 @@ public class CircularDoubleLinkedList<E> implements List<E> {
 
     @Override
     public boolean insert(int index, E e) {
-        if(index>tam-1 || index<0) {
+        if (index > tam - 1 || index < 0) {
             throw new IndexOutOfBoundsException("El indice pedido supera el tamaño de la lista.");
         }
-        if(e==null||isEmpty()) {
+        if (e == null || isEmpty()) {
             return false;
         }
-        if(index==0) {
+        if (index == 0) {
             return addFirst(e);
         }
         Node<E> node = new Node<>(e);
@@ -196,19 +210,18 @@ public class CircularDoubleLinkedList<E> implements List<E> {
 
     @Override
     public boolean set(int index, E e) {
-        if(index>tam-1 || index<0) {
+        if (index > tam - 1 || index < 0) {
             throw new IndexOutOfBoundsException("El indice pedido supera el tamaño de la lista.");
         }
-        if(e==null) {
+        if (e == null) {
             return false;
         }
-        if(index==0) {
-            last.sig.datos= e;
+        if (index == 0) {
+            last.sig.datos = e;
         }
-        if(index==tam-1) {
+        if (index == tam - 1) {
             last.datos = e;
-        }
-        else{
+        } else {
             Node<E> node = getNode(index);
             node.datos = e;
         }
@@ -217,21 +230,21 @@ public class CircularDoubleLinkedList<E> implements List<E> {
 
     @Override
     public boolean isEmpty() {
-        return tam==0;
+        return tam == 0;
     }
 
     @Override
     public E get(int index) {
-        if(isEmpty()) {
+        if (isEmpty()) {
             throw new IllegalStateException("Lista vacia");
         }
-        if(index>tam-1 || index<0){
+        if (index > tam - 1 || index < 0) {
             throw new IndexOutOfBoundsException("El indice pedido supera el tamaño de la lista.");
         }
-        if(index==0) {
+        if (index == 0) {
             return last.sig.datos;
         }
-        if(index==tam-1) {
+        if (index == tam - 1) {
             return last.datos;
         }
         Node<E> node = getNode(index);
@@ -241,56 +254,54 @@ public class CircularDoubleLinkedList<E> implements List<E> {
     @Override
     public boolean contains(E e) {
         Node node = last.sig;
-        do{
-            if(node.datos.equals(e)) {
+        do {
+            if (node.datos.equals(e)) {
                 return true;
             }
             node = node.sig;
-        }
-        while(node!=last);
+        } while (node != last);
 
         return false;
     }
 
     @Override
     public boolean remove(int index) {
-        if(index>=tam) {
+        if (index >= tam) {
             throw new IndexOutOfBoundsException("Indice fuera de los límites");
         }
-        if(index==0) {
+        if (index == 0) {
             return removeFirst();
         }
-        if(index == tam-1) {
+        if (index == tam - 1) {
             return removeLast();
         }
-        Node<E> node = getNode(index-1);
+        Node<E> node = getNode(index - 1);
         Node<E> nRemover = node.sig;
         Node<E> nSig = nRemover.sig;
-        nRemover.datos = null; 
+        nRemover.datos = null;
         node.sig = nSig;
         nSig.ant = node;
         tam--;
         return true;
     }
+
     @Override
-    public String toString()
-    {
-        if(isEmpty()) {
+    public String toString() {
+        if (isEmpty()) {
             return "[]";
         }
         StringBuilder sb = new StringBuilder();
         sb.append("[");
         Node<E> node = last.sig;
-        for(int i =0; i<tam-1; i++)
-        {
+        for (int i = 0; i < tam - 1; i++) {
             sb.append(node.datos);
             sb.append(",");
-            node=node.sig;
-            
+            node = node.sig;
+
         }
         sb.append(last.datos);
         sb.append("]");
         return sb.toString();
     }
-    
+
 }
