@@ -18,7 +18,8 @@ public class Main extends Application{
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        File file=new File("src\\Archivos\\text.txt");
+        File file=new File("src\\Archivos\\photos2.txt");
+        //System.out.println(file);
         try{
             file.createNewFile();
             

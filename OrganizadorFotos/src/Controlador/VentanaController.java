@@ -2,8 +2,18 @@ package Controlador;
 
 import Modelo.CircularDoubleLinkedList;
 import Modelo.Foto;
+import static Modelo.Foto.cargarFotos;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -54,8 +64,29 @@ public class VentanaController implements Initializable {
 
         JOptionPane.showMessageDialog(null, "Album " + nombre + " creado con exito!");
         CircularDoubleLinkedList<Foto> album = new CircularDoubleLinkedList(nombre);
-        System.out.println("ALBUM CREADO: " + album.getNombreAlbum());
-        
+        System.out.println("ALBUM CREADO: " + album.getNombreAlbum() + "\n");
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+        Foto fotoprueba = new Foto("foto1.jpg", "src\\Archivos\\foto1.jpg");
+
+        try {
+          
+            fichero = new FileWriter("src\\Archivos\\albums.txt", true);
+            pw = new PrintWriter(fichero);
+            pw.println(album.getNombreAlbum() + "," + album);
+        } catch (Exception e) {
+            System.out.println(e);;
+        } finally {
+            try {
+                // Nuevamente aprovechamos el finally para 
+                // asegurarnos que se cierra el fichero.
+                if (null != fichero) {
+                    fichero.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
 
     }
 
@@ -72,7 +103,7 @@ public class VentanaController implements Initializable {
 
     @FXML
     private void importarFoto() {
-        btnImportar.setOnAction(new EventHandler<ActionEvent>() {
+        /*btnImportar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 FileChooser fileChooser = new FileChooser();
@@ -97,7 +128,8 @@ public class VentanaController implements Initializable {
                     }
                 }
             }
-        });
+        });*/
+        cargarFotos();
     }
 
 }

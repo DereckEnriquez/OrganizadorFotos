@@ -1,0 +1,5 @@
+foto1,Desktop\\test\\foto1.jpg
+foto2,Desktop\\test\\foto2.jpg
+foto3,Desktop\\test\\foto3.jpg
+foto4,Desktop\\test\\foto4.jpg
+foto5,Desktop\\test\\foto5.jpg
