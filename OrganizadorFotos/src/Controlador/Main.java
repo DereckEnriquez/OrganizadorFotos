@@ -1,5 +1,6 @@
 package Controlador;
 
+import static Modelo.Foto.cargarFotos;
 import java.io.File;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -18,15 +19,7 @@ public class Main extends Application{
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        File file=new File("src\\Archivos\\photos2.txt");
-        //System.out.println(file);
-        try{
-            file.createNewFile();
-            
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        launch(args);
+        cargarFotos();
     }
 
     @Override

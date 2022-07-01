@@ -3,6 +3,7 @@ package Modelo;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 
 /**
  *
@@ -42,24 +43,21 @@ public class Foto {
         return "Foto{" + "nombre=" + nombre + ", ruta=" + ruta + '}';
     }
 
-    public static File doc = new File("src\\Archivos\\photos.txt");
-
     public static CircularDoubleLinkedList<Foto> cargarFotos() {
         CircularDoubleLinkedList<Foto> fotos = new CircularDoubleLinkedList<>();
-        System.out.println(doc);
-        try (
-            FileReader f = new FileReader(doc);
-            BufferedReader bf = new BufferedReader(f)){
 
+        try {
+            //FileReader f = new FileReader("src\\Archivos\\photos.txt");
+            BufferedReader bf = new BufferedReader(new FileReader(new File("src\\Archivos\\photos.txt").getCanonicalFile()));
             String linea;
             while ((linea = bf.readLine()) != null) {
                 String[] p = linea.split(",");
-                Foto foto = new Foto(p[1].toString(), p[2].toString());
+                Foto foto = new Foto(p[0].toString(), p[1].toString());
                 fotos.addLast(foto);
                 System.out.println(fotos);
             }
         } catch (Exception ex) {
-            System.out.println(ex);
+            System.out.println(ex.getMessage());
         }
         return fotos;
 

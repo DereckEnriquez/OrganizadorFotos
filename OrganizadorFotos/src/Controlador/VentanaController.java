@@ -28,6 +28,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.swing.JFrame;
@@ -59,34 +60,15 @@ public class VentanaController implements Initializable {
     @FXML
     private void crearalbum(ActionEvent event) {
         System.out.println("clic crear menu");
-
         String nombre = JOptionPane.showInputDialog("Nombre del Album:");
 
         JOptionPane.showMessageDialog(null, "Album " + nombre + " creado con exito!");
         CircularDoubleLinkedList<Foto> album = new CircularDoubleLinkedList(nombre);
         System.out.println("ALBUM CREADO: " + album.getNombreAlbum() + "\n");
+
         FileWriter fichero = null;
         PrintWriter pw = null;
-        Foto fotoprueba = new Foto("foto1.jpg", "src\\Archivos\\foto1.jpg");
-
-        try {
-          
-            fichero = new FileWriter("src\\Archivos\\albums.txt", true);
-            pw = new PrintWriter(fichero);
-            pw.println(album.getNombreAlbum() + "," + album);
-        } catch (Exception e) {
-            System.out.println(e);;
-        } finally {
-            try {
-                // Nuevamente aprovechamos el finally para 
-                // asegurarnos que se cierra el fichero.
-                if (null != fichero) {
-                    fichero.close();
-                }
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
-        }
+        EscribirAlbumTxt(fichero, pw, album);
 
     }
 
@@ -103,7 +85,7 @@ public class VentanaController implements Initializable {
 
     @FXML
     private void importarFoto() {
-        /*btnImportar.setOnAction(new EventHandler<ActionEvent>() {
+        btnImportar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 FileChooser fileChooser = new FileChooser();
@@ -128,8 +110,31 @@ public class VentanaController implements Initializable {
                     }
                 }
             }
-        });*/
+        });
+
         cargarFotos();
     }
 
+    public void EscribirAlbumTxt(FileWriter fichero, PrintWriter pw, CircularDoubleLinkedList<Foto> album) {
+        try {
+            fichero = new FileWriter("src\\Archivos\\albums.txt", true);
+            pw = new PrintWriter(fichero);
+            pw.println(album.getNombreAlbum() + "," + album);
+        } catch (Exception e) {
+            System.out.println(e);;
+        } finally {
+            try {
+                if (null != fichero) {
+                    fichero.close();
+                }
+            } catch (Exception e2) {
+                System.out.println(e2);;
+            }
+        }
+        cargarAlbums(album);
+    }
+
+    public void cargarAlbums(CircularDoubleLinkedList<Foto> album) {
+        vbTitulos.getChildren().add(new Text(album.getNombreAlbum()));
+    }
 }
