@@ -4,19 +4,25 @@ package Modelo;
  *
  * @author Dereck Enríquez
  */
-public class Album {
+public class Album implements Comparable<CircularDoubleLinkedList>{
     String nombre;
     String ruta;
+    String descripAlbum;
     CircularDoubleLinkedList<Foto> album;
 
-    public Album(String nombre, String ruta, CircularDoubleLinkedList<Foto> album) {
+    public Album(String nombre, String ruta, String descripAlbum, CircularDoubleLinkedList<Foto> album) {
         this.nombre = nombre;
         this.ruta = ruta;
+        this.descripAlbum = descripAlbum;
         this.album = album;
     }
+    
+    public Album(){}
+    /*
+    public Foto mostrarFotos(){
+        //album
+    }*/
 
-    public Album() {
-    }
 
     public String getNombre() {
         return nombre;
@@ -34,6 +40,14 @@ public class Album {
         this.ruta = ruta;
     }
 
+    public String getDescripAlbum() {
+        return descripAlbum;
+    }
+
+    public void setDescripAlbum(String descripAlbum) {
+        this.descripAlbum = descripAlbum;
+    }
+
     public CircularDoubleLinkedList<Foto> getAlbum() {
         return album;
     }
@@ -44,6 +58,15 @@ public class Album {
 
     @Override
     public String toString() {
-        return "Album{" + "nombre=" + nombre + ", ruta=" + ruta + ", album=" + album + '}';
+        return "Album{" + "nombre=" + nombre + ", ruta=" + ruta + ", descripAlbum=" + descripAlbum + ", album=" + album + '}';
+    }   
+
+    @Override
+    public int compareTo(CircularDoubleLinkedList o) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    
+    
+
 }

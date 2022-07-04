@@ -21,8 +21,10 @@ import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -31,9 +33,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -56,6 +62,13 @@ public class VentanaController implements Initializable {
     private HBox hbGaleria;
     @FXML
     private VBox vbTitulos;
+    @FXML
+    private TextField jLDireccion;
+    @FXML
+    private Label jLDireccion2;
+    private ImageView Icon;
+    @FXML
+    private ImageView foto1;
 
     @FXML
     private void crearalbum(ActionEvent event) {
@@ -83,9 +96,48 @@ public class VentanaController implements Initializable {
 
     }
 
+    File archivo;
     @FXML
     private void importarFoto() {
         btnImportar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                int resultado;
+                buscarIMG Buscador = new buscarIMG();
+                FileNameExtensionFilter formato = new FileNameExtensionFilter("JPG","PNG","GIF","jpg","png","gif");
+                
+                Buscador.JFCImg.setFileFilter(formato);
+                resultado = Buscador.JFCImg.showOpenDialog(null);   //si damos abrir tomara el valor de 1 y si damos cancelar 0
+                
+                if(JFileChooser.APPROVE_OPTION == resultado){
+                    archivo =  Buscador.JFCImg.getSelectedFile();//Información del archivo
+                    
+                    jLDireccion.setText(archivo.getAbsolutePath());                          
+                                                      
+                try{
+                    //ImageIcon ImgIcon = new ImageIcon(archivo.toString());
+                    System.out.println("Entro al try");
+                    System.out.println(archivo.getAbsolutePath());
+                    
+                    Image image = new Image("foto1.jpg" );
+                    
+                    foto1.setImage(image);  
+                    foto1.setPreserveRatio(true);
+                    foto1.setSmooth(true);
+                    foto1.setCache(true);
+                    //Icon icono = new ImageIcon(ImgIcon.getImage().getScaledInstance(jLImg.getWidth(),jLImg.getHeight(),Image.SCALE_DEFAULT));
+                    //JLImg.setIcon(icono);                
+                }catch(Exception ex){
+                JOptionPane.showMessageDialog(null,"Error al abrir"+ex);
+                
+            }
+                
+                }
+                
+                
+                
+                
+                    /*
             @Override
             public void handle(ActionEvent event) {
                 FileChooser fileChooser = new FileChooser();
@@ -109,11 +161,21 @@ public class VentanaController implements Initializable {
 
                     }
                 }
-            }
-        });
+            }*/
+                cargarFotos();
+ 
+                
+            }});}
+                
 
-        cargarFotos();
-    }
+            
+            
+            
+            
+        
+
+
+    
 
     public void EscribirAlbumTxt(FileWriter fichero, PrintWriter pw, CircularDoubleLinkedList<Foto> album) {
         try {
