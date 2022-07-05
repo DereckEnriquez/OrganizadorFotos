@@ -85,8 +85,7 @@ public class Foto {
                 System.out.println(linea);
                 String[] p = linea.split(",");
                 Foto foto = new Foto(p[0], p[1]);
-                fotos.addFirst(
-                        foto);
+                fotos.addFirst(foto);
                
             }
         } catch (Exception ex) {
