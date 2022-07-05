@@ -2,7 +2,6 @@ package Controlador;
 
 import Modelo.CircularDoubleLinkedList;
 import Modelo.Foto;
-import static Modelo.Foto.cargarFotos;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,6 +28,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -69,15 +69,17 @@ public class VentanaController implements Initializable {
     private ImageView Icon;
     @FXML
     private ImageView foto1;
-
+    
+    static CircularDoubleLinkedList<Foto> fotos = Foto.leerFotos();
     @FXML
     private void crearalbum(ActionEvent event) {
         System.out.println("clic crear menu");
         String nombre = JOptionPane.showInputDialog("Nombre del Album:");
-
-        JOptionPane.showMessageDialog(null, "Album " + nombre + " creado con exito!");
-        CircularDoubleLinkedList<Foto> album = new CircularDoubleLinkedList(nombre);
+        String descripcion=JOptionPane.showInputDialog("Descripción del Album "+nombre+":"); 
+        JOptionPane.showMessageDialog(null, "Album " + nombre + " creado con exito!" +"\ncon la descripción:"+descripcion);
+        CircularDoubleLinkedList<Foto> album = new CircularDoubleLinkedList(nombre,descripcion);
         System.out.println("ALBUM CREADO: " + album.getNombreAlbum() + "\n");
+        System.out.println("Descripcion:"+album.getDescripcion()+"\n");
 
         FileWriter fichero = null;
         PrintWriter pw = null;
@@ -93,7 +95,29 @@ public class VentanaController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         exploradorArchivo.setInitialDirectory(new File("C:"));
+        
+        
+        for (Foto ca : fotos) {
+            InputStream input = null;
+            try {
+                //elementos graficos de la escena
+                input = App.class.getResource(ca.getRutaImagen()).openStream();
+                Image imagen = new Image(input, 75, 75, true, true);
+                ImageView imgview = new ImageView(imagen);
+                //creacion de una casa generica
+                StackPane st = new StackPane();
+                st.getChildren().addAll(imgview);
+                //agregar el stackpane al PanelCasas
+                PanelCasas.getChildren().addAll(st);
 
+                //fijar la ubicacion del st en la ubicacion del casa
+                st.setLayoutX(ca.getUbicacion().getX());
+                st.setLayoutY(ca.getUbicacion().getY());
+                //evento que al pasar el mouse muestra la informacion de la casa deseada
+            
+        }
+    }
+        
     }
 
     File archivo;
@@ -161,27 +185,17 @@ public class VentanaController implements Initializable {
 
                     }
                 }
-            }*/
-                cargarFotos();
- 
-                
+            }*/   
             }});}
                 
 
             
-            
-            
-            
-        
-
-
-    
-
+          
     public void EscribirAlbumTxt(FileWriter fichero, PrintWriter pw, CircularDoubleLinkedList<Foto> album) {
         try {
             fichero = new FileWriter("src\\Archivos\\albums.txt", true);
             pw = new PrintWriter(fichero);
-            pw.println(album.getNombreAlbum() + "," + album);
+            pw.println(album.getNombreAlbum() + "," +album.getDescripcion()+","+ album);
         } catch (Exception e) {
             System.out.println(e);;
         } finally {
@@ -199,4 +213,5 @@ public class VentanaController implements Initializable {
     public void cargarAlbums(CircularDoubleLinkedList<Foto> album) {
         vbTitulos.getChildren().add(new Text(album.getNombreAlbum()));
     }
+    
 }

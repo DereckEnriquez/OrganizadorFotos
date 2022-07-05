@@ -1,10 +1,11 @@
 package Modelo;
+import java.util.Iterator;
 /**
  *
  * @author Dereck Enriquez
  * @param <E>
  */
-public interface List <E>{
+public interface List <E> extends Iterable<E> {
     // Intenta insertar el elemento al inicio y retorna verdadero si lo logró hacer, falso sino
     boolean addFirst(E e);
     // Intenta insertar el elemento al final y retorna verdadero si lo logró hacer, falso sino

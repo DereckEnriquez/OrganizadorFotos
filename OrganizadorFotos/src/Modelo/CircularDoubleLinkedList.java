@@ -1,5 +1,8 @@
 package Modelo;
 
+import java.util.Iterator;
+import java.util.function.Consumer;
+
 /**
  *
  * @author Danilo Torres Vera
@@ -7,9 +10,17 @@ package Modelo;
 public class CircularDoubleLinkedList<E> implements List<E> {
 
     private String nombreAlbum;
+    private String descripcion;
     private Node<E> last;
     private int tam;
 
+    //Iterable
+    @Override
+    public Iterator<E> iterator(){
+        return null;
+    }
+// end methods iterable 
+    
     private class Node<E> {
 
         private E datos;
@@ -32,8 +43,23 @@ public class CircularDoubleLinkedList<E> implements List<E> {
     public CircularDoubleLinkedList(String nombreAlbum) {
         this.nombreAlbum = nombreAlbum;
         last = null;
-        tam = 0;
+        tam = this.tam;
     }
+
+    public CircularDoubleLinkedList(String nombreAlbum, String descripcion) {
+        this.nombreAlbum = nombreAlbum;
+        this.descripcion = descripcion;
+        tam=this.tam;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
 
     public String getNombreAlbum() {
         return nombreAlbum;

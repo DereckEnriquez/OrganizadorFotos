@@ -1,6 +1,6 @@
 package Controlador;
 
-import static Modelo.Foto.cargarFotos;
+import static Modelo.Foto.leerFotos;
 import java.io.File;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -19,8 +19,9 @@ public class Main extends Application{
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        leerFotos();
         launch();
-        //cargarFotos();
+       
            
     }
 
