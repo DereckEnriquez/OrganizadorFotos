@@ -84,28 +84,4 @@ public class Album implements Comparable<CircularDoubleLinkedList>{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
-    public static CircularDoubleLinkedList<Album> leerAlbums() {
-        CircularDoubleLinkedList<Album> albums = new CircularDoubleLinkedList<>();
-        System.out.println("lista de fotos creada:" + albums);
-
-        try (InputStream input = Main.class.getResourceAsStream("/Archivos/albums.txt");
-                BufferedReader bf = new BufferedReader(new InputStreamReader(input, "UTF-8"))) {
-
-            String linea;
-            while ((linea = bf.readLine()) != null) {
-                System.out.println(linea);
-                String[] p = linea.split(",");
-                System.out.println("p[2]:" + p[2]);
-                Album album = new Album(p[0], p[1]);
-                albums.addFirst(album);
-
-            }
-        } catch (Exception ex) {
-            System.out.println(ex.getLocalizedMessage());
-            ex.printStackTrace();
-        }
-        System.out.println("lista de albums llena:" + albums);
-        return albums;
-    }
-
 }

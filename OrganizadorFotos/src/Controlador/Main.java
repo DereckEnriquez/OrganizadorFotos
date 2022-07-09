@@ -1,9 +1,9 @@
 package Controlador;
 
-import static Modelo.Album.leerAlbums;
+import static Controlador.VentanaController.leerAlbums;
+import static Controlador.VentanaController.leerFotos;
 import Modelo.CircularDoubleLinkedList;
 import Modelo.Foto;
-import static Modelo.Foto.leerFotos;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +30,7 @@ public class Main extends Application{
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/Vista/VAlbum.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Vista/Ventana.fxml"));
         Scene scene = new Scene(root);
         stage.setTitle("Albums");
         stage.setScene(scene);

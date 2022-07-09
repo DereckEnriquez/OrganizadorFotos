@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="677.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VentanaController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="677.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VentanaController">
    <center>
       <Pane id="panel" fx:id="panel" prefHeight="474.0" prefWidth="637.0" BorderPane.alignment="CENTER">
          <padding>
@@ -39,7 +39,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="Archivo">
             <items>
-                  <MenuItem mnemonicParsing="false" onAction="#crearalbum" text="Crear álbum" />
+                  <MenuItem mnemonicParsing="false" onAction="#irFormulariofxml" text="Crear álbum" />
                   <MenuItem fx:id="btnImportar" mnemonicParsing="false" onAction="#importarFoto" text="Importar fotos" />
                   <MenuItem mnemonicParsing="false" onAction="#salirmenu" text="Salir" />
             </items>
