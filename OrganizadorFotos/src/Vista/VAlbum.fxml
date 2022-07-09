@@ -2,35 +2,62 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="645.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VAlbumController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VAlbumController">
    <center>
-      <ListView fx:id="listAlbum" onMouseClicked="#clickLista" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <ListView fx:id="listAlbum" onMouseClicked="#clickLista" prefHeight="394.0" prefWidth="546.0" BorderPane.alignment="CENTER" />
    </center>
    <right>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="461.0" prefWidth="204.0" spacing="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnAnadir" mnemonicParsing="false" text="Agregar">
+            <TextField fx:id="txtinputAlbum" prefHeight="26.0" prefWidth="172.0">
                <VBox.margin>
-                  <Insets left="20.0" top="120.0" />
+                  <Insets left="10.0" right="10.0" top="20.0" />
+               </VBox.margin>
+            </TextField>
+            <Button fx:id="btnAnadir" mnemonicParsing="false" onAction="#agregarAlbum" text="Agregar">
+               <VBox.margin>
+                  <Insets left="75.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="btnElim" mnemonicParsing="false" text="Eliminar">
+            <Button fx:id="btnElim" mnemonicParsing="false" onAction="#eliminarAlbum" text="Eliminar">
                <VBox.margin>
-                  <Insets left="20.0" top="100.0" />
+                  <Insets left="75.0" />
                </VBox.margin>
             </Button>
          </children>
+         <padding>
+            <Insets top="40.0" />
+         </padding>
       </VBox>
    </right>
    <bottom>
-      <Button fx:id="btnInicio" mnemonicParsing="false" text="Home" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets bottom="20.0" top="20.0" />
-         </BorderPane.margin>
-      </Button>
+      <HBox prefHeight="34.0" prefWidth="630.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="lblnoti" text="Label" textFill="#00ff40" textOverrun="CENTER_ELLIPSIS">
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="Calibri Bold" size="27.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnHome" mnemonicParsing="false" text="Home">
+               <HBox.margin>
+                  <Insets left="220.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="30.0" top="20.0" />
+         </padding>
+      </HBox>
    </bottom>
 </BorderPane>
