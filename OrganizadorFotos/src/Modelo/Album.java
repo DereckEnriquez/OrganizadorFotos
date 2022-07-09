@@ -12,35 +12,17 @@ import java.io.InputStreamReader;
  */
 public class Album implements Comparable<CircularDoubleLinkedList>{
     String nombre;
-    String ruta;
     String descripAlbum;
-    CircularDoubleLinkedList<Foto> album;
-
-    public Album(String nombre, String ruta, String descripAlbum, CircularDoubleLinkedList<Foto> album) {
-        this.nombre = nombre;
-        this.ruta = ruta;
-        this.descripAlbum = descripAlbum;
-        this.album = album;
-    }
-
-    public Album(String nombre, String descripAlbum, CircularDoubleLinkedList<Foto> album) {
-        this.nombre = nombre;
-        this.descripAlbum = descripAlbum;
-        this.album = album;
-    }
 
     public Album(String nombre, String descripAlbum) {
         this.nombre = nombre;
         this.descripAlbum = descripAlbum;
     }
-    
-    
-    public Album(){}
-    /*
-    public Foto mostrarFotos(){
-        //album
-    }*/
 
+    @Override
+    public String toString() {
+        return "Album{" + "nombre=" + nombre + ", descripAlbum=" + descripAlbum + '}';
+    }
 
     public String getNombre() {
         return nombre;
@@ -48,14 +30,6 @@ public class Album implements Comparable<CircularDoubleLinkedList>{
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getRuta() {
-        return ruta;
-    }
-
-    public void setRuta(String ruta) {
-        this.ruta = ruta;
     }
 
     public String getDescripAlbum() {
@@ -66,22 +40,9 @@ public class Album implements Comparable<CircularDoubleLinkedList>{
         this.descripAlbum = descripAlbum;
     }
 
-    public CircularDoubleLinkedList<Foto> getAlbum() {
-        return album;
-    }
-
-    public void setAlbum(CircularDoubleLinkedList<Foto> album) {
-        this.album = album;
-    }
-
-    @Override
-    public String toString() {
-        return "Album{" + "nombre=" + nombre + ", ruta=" + ruta + ", descripAlbum=" + descripAlbum + ", album=" + album + '}';
-    }   
-
     @Override
     public int compareTo(CircularDoubleLinkedList o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

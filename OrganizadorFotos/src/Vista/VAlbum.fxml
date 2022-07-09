@@ -15,19 +15,29 @@
       <ListView fx:id="listAlbum" onMouseClicked="#clickLista" prefHeight="394.0" prefWidth="546.0" BorderPane.alignment="CENTER" />
    </center>
    <right>
-      <VBox prefHeight="461.0" prefWidth="204.0" spacing="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="461.0" prefWidth="204.0" spacing="70.0" BorderPane.alignment="CENTER">
          <children>
             <TextField fx:id="txtinputAlbum" prefHeight="26.0" prefWidth="172.0">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" top="20.0" />
                </VBox.margin>
             </TextField>
-            <Button fx:id="btnAnadir" mnemonicParsing="false" onAction="#agregarAlbum" text="Agregar">
+            <Button fx:id="btnAnadir" mnemonicParsing="false" onAction="#agregarAlbum" text="add">
                <VBox.margin>
                   <Insets left="75.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="btnElim" mnemonicParsing="false" onAction="#eliminarAlbum" text="Eliminar">
+            <Button fx:id="btnaddAll" mnemonicParsing="false" onAction="#addAll" text="addAll">
+               <VBox.margin>
+                  <Insets left="75.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="btnModificar" mnemonicParsing="false" onAction="#modificarAlbum" text="Modificar">
+               <VBox.margin>
+                  <Insets left="75.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="btnElim" mnemonicParsing="false" onAction="#eliminarAlbum" text="Delete">
                <VBox.margin>
                   <Insets left="75.0" />
                </VBox.margin>
@@ -46,7 +56,7 @@
                   <Insets left="20.0" />
                </HBox.margin>
                <font>
-                  <Font name="Calibri Bold" size="27.0" />
+                  <Font name="Calibri Bold" size="18.0" />
                </font>
             </Label>
             <Button fx:id="btnHome" mnemonicParsing="false" text="Home">

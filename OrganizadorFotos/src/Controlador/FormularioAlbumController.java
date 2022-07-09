@@ -32,21 +32,31 @@ public class FormularioAlbumController implements Initializable {
         // TODO
     }
 
+    //CREA UN ALBUM representado en un .txt con su nombre ingresado
+    //añade ese album al album.txt que estan todos los nombres de los albums 
     @FXML
     private void btnCrear(ActionEvent event) {
         String nombreAlbum = this.txtNombreAlbum.getText();
         String DescripcionAlbum = this.txtDescripcionAlbum.getText();
         System.out.println("clic btn crear album");
         CircularDoubleLinkedList<Foto> album = new CircularDoubleLinkedList(nombreAlbum, DescripcionAlbum);
+        
         System.out.println("ALBUM CREADO: " + album.getNombreAlbum());
         System.out.println("Descripcion:" + album.getDescripcion() + "\n");
 
         FileWriter fichero = null;
         PrintWriter pw = null;
+        
         try {
-            fichero = new FileWriter("src\\Archivos\\albums.txt", true);
+            //escribir un nuevo archivo -> album
+            fichero = new FileWriter("src\\Archivos\\"+nombreAlbum+".txt", true);
             pw = new PrintWriter(fichero);
             pw.println(album.getNombreAlbum() + "," + album.getDescripcion() + "," + album);
+            
+            //escribir en el archivo de albums.txt que solo lleva la base de datos de los albunes creados y su descripcion
+            fichero = new FileWriter("src\\Archivos\\albums.txt", true);
+            pw = new PrintWriter(fichero);
+            pw.println(album.getNombreAlbum() + "," + album.getDescripcion());
         } catch (Exception e) {
             System.out.println(e);;
         } finally {

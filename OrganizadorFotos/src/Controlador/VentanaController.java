@@ -5,6 +5,7 @@ import Modelo.CircularDoubleLinkedList;
 import Modelo.Foto;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +15,8 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -43,17 +46,17 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Dereck Enríquez
  */
 public class VentanaController implements Initializable {
-    
+
     FileChooser exploradorArchivo = new FileChooser();
     @FXML
     private MenuBar menubar;
-    
+
     @FXML
     private Pane panel;
-    
+
     @FXML
     private MenuItem btnImportar;
-    
+
     Stage stage = new Stage();
     @FXML
     private HBox hbGaleria;
@@ -66,17 +69,16 @@ public class VentanaController implements Initializable {
     private ImageView Icon;
     @FXML
     private ImageView foto1;
-    
+
     File archivo;
-    
+
     static CircularDoubleLinkedList<Foto> fotos;
-    
-        
+
     @FXML
     private void salirmenu(ActionEvent event) {
         System.out.println("clic salir menu");
     }
-    
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         exploradorArchivo.setInitialDirectory(new File("C:"));
@@ -101,7 +103,7 @@ public class VentanaController implements Initializable {
         }
     }*/
     }
-    
+
     @FXML
     private void importarFoto() {
         btnImportar.setOnAction(new EventHandler<ActionEvent>() {
@@ -110,22 +112,23 @@ public class VentanaController implements Initializable {
                 int resultado;
                 buscarIMG Buscador = new buscarIMG();
                 FileNameExtensionFilter formato = new FileNameExtensionFilter("JPG", "PNG", "GIF", "jpg", "png", "gif");
-                
+
                 Buscador.JFCImg.setFileFilter(formato);
                 resultado = Buscador.JFCImg.showOpenDialog(null);
-                
+
                 if (JFileChooser.APPROVE_OPTION == resultado) {
                     archivo = Buscador.JFCImg.getSelectedFile();
-                    
+
                     jLDireccion.setText(archivo.getAbsolutePath());
-                    
+
                     try {
                         //ImageIcon ImgIcon = new ImageIcon(archivo.toString());
                         System.out.println("Entro al try");
                         System.out.println(archivo.getAbsolutePath());
+
                         
-                        Image image = new Image("foto1.jpg");
-                        
+                        FileInputStream input = new FileInputStream(archivo);
+                        Image image = new Image(input);
                         foto1.setImage(image);
                         foto1.setPreserveRatio(true);
                         foto1.setSmooth(true);
@@ -134,19 +137,19 @@ public class VentanaController implements Initializable {
                         //JLImg.setIcon(icono);                
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(null, "Error al abrir" + ex);
-                        
+
                     }
-                    
+
                 }
             }
         });
     }
-    
+
     public void EscribirAlbumTxt(FileWriter fichero, PrintWriter pw, CircularDoubleLinkedList<Foto> album) {
         try {
             fichero = new FileWriter("src\\Archivos\\albums.txt", true);
             pw = new PrintWriter(fichero);
-            pw.println(album.getNombreAlbum() + "," + album.getDescripcion() + "," + album);
+            pw.println(album.getNombreAlbum() + "," + album.getDescripcion());
         } catch (Exception e) {
             System.out.println(e);;
         } finally {
@@ -160,14 +163,22 @@ public class VentanaController implements Initializable {
         }
         vbTitulos.getChildren().add(new Text(album.getNombreAlbum()));
     }
-    
+
+    public static void leerBibliotecabeta() {
+        try (InputStream input = Main.class.getResourceAsStream("/Archivos/biblioteca.txt");
+                BufferedReader bf = new BufferedReader(new InputStreamReader(input, "UTF-8"))) {
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+    }
+
     public static CircularDoubleLinkedList<Foto> leerFotos() {
         CircularDoubleLinkedList<Foto> fotos = new CircularDoubleLinkedList<>();
         System.out.println("lista de fotos creada:" + fotos);
-        
+
         try (InputStream input = Main.class.getResourceAsStream("/Archivos/photos.txt");
                 BufferedReader bf = new BufferedReader(new InputStreamReader(input, "UTF-8"))) {
-            
+
             String linea;
             while ((linea = bf.readLine()) != null) {
                 System.out.println(linea);
@@ -177,7 +188,7 @@ public class VentanaController implements Initializable {
                 fechaDate = formato.parse(p[3]);
                 Foto foto = new Foto(p[0], p[1], p[2], fechaDate, p[4]);
                 fotos.addFirst(foto);
-                
+
             }
         } catch (Exception ex) {
             System.out.println(ex.getLocalizedMessage());
@@ -186,22 +197,22 @@ public class VentanaController implements Initializable {
         System.out.println("lista de fotos llena:" + fotos);
         return fotos;
     }
-    
+
+    //album.txt es un archivo con todos los nombres de los albums 
     public static CircularDoubleLinkedList<Album> leerAlbums() {
         CircularDoubleLinkedList<Album> albums = new CircularDoubleLinkedList<>();
         System.out.println("lista de albums creada:" + albums);
-        
+
         try (InputStream input = Main.class.getResourceAsStream("/Archivos/albums.txt");
                 BufferedReader bf = new BufferedReader(new InputStreamReader(input, "UTF-8"))) {
-            
+
             String linea;
             while ((linea = bf.readLine()) != null) {
                 System.out.println(linea);
                 String[] p = linea.split(",");
-                System.out.println("p[2]:" + p[2]);
                 Album album = new Album(p[0], p[1]);
                 albums.addFirst(album);
-                
+
             }
         } catch (Exception ex) {
             System.out.println(ex.getLocalizedMessage());
@@ -210,10 +221,10 @@ public class VentanaController implements Initializable {
         System.out.println("lista de albums llena:" + albums);
         return albums;
     }
-    
+
     @FXML
     private void irFormulariofxml(ActionEvent event) throws IOException {
-        
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vista/FormularioAlbum.fxml"));
         Parent root = loader.load();
         FormularioAlbumController controlador = loader.getController(); //VentanaController ???

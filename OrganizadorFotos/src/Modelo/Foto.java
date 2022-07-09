@@ -68,4 +68,9 @@ public class Foto {
         this.ruta = ruta;
     }
 
+    @Override
+    public String toString() {
+        return "Foto{" + "nombre=" + nombre + ", descripcion=" + descripcion + ", lugar=" + lugar + ", fecha=" + fecha + ", ruta=" + ruta + '}';
+    }
+
 }
