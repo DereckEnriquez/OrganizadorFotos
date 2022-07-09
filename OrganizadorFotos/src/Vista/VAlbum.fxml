@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="645.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VAlbumController">
+   <center>
+      <ListView fx:id="listAlbum" onMouseClicked="#clickLista" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+   <right>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnAnadir" mnemonicParsing="false" text="Agregar">
+               <VBox.margin>
+                  <Insets left="20.0" top="120.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="btnElim" mnemonicParsing="false" text="Eliminar">
+               <VBox.margin>
+                  <Insets left="20.0" top="100.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </right>
+   <bottom>
+      <Button fx:id="btnInicio" mnemonicParsing="false" text="Home" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="20.0" top="20.0" />
+         </BorderPane.margin>
+      </Button>
+   </bottom>
+</BorderPane>
