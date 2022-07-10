@@ -51,6 +51,7 @@
             <items>
               <MenuItem mnemonicParsing="false" onAction="#irFormularioEliminarAlbumfxml" text="Eliminar álbum" />
                   <MenuItem mnemonicParsing="false" onAction="#irFormularioEliminarFotofxml" text="Eliminar foto" />
+                  <MenuItem mnemonicParsing="false" onAction="#irFormularioEliminarPersonafxml" text="Eliminar Persona" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

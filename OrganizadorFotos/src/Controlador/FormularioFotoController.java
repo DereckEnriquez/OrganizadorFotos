@@ -46,6 +46,8 @@ public class FormularioFotoController implements Initializable {
     private TextField txtRutaFoto;
     @FXML
     private ImageView imageviewFoto;
+    @FXML
+    private TextField txtPersonas;
 
     /**
      * Initializes the controller class.

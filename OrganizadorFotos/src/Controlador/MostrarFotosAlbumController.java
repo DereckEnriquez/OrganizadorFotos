@@ -42,23 +42,24 @@ public class MostrarFotosAlbumController implements Initializable {
         // TODO
         showName();
         mostrar();
-    }    
+    }
 
     @FXML
     private void back(MouseEvent event) throws IOException {
-         Main.setRoot("/Vista/Ventana");
+        Main.setRoot("/Vista/Ventana");
     }
+
     private Pane createBookView(String foto) throws FileNotFoundException {
-        
+
         VBox vbox = new VBox();
-        FileInputStream f =new FileInputStream(foto);
-        final Image image = new Image(f,150, 0, true, false);
+        FileInputStream f = new FileInputStream(foto);
+        final Image image = new Image(f, 150, 0, true, false);
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(150);
         imageView.setFitHeight(100);
-        
+
         vbox.getChildren().add(imageView);
-                        
+
         Label titleLabel = new Label("imagen");
         titleLabel.setMaxWidth(150);
         vbox.getChildren().add(titleLabel);
@@ -66,64 +67,64 @@ public class MostrarFotosAlbumController implements Initializable {
         yearLabel.setTextFill(Color.web("#0000FF"));
         yearLabel.setStyle("-fx-font-weight: bold");
         vbox.getChildren().add(yearLabel);
-        
+
         return vbox;
     }
-    private void mostrar (){
+
+    private void mostrar() {
         File archivo = null;
         FileReader fr = null;
         BufferedReader br = null;
-        
+
         try {
-            archivo = new File ("tmp.txt");
-            fr = new FileReader (archivo);
+            archivo = new File("tmp.txt");
+            fr = new FileReader(archivo);
             br = new BufferedReader(fr);
 
             // Lectura del fichero
             String linea;
-            linea=br.readLine();
+            linea = br.readLine();
             File archivo2 = null;
             FileReader fr2 = null;
             BufferedReader br2 = null;
-            try{
-                archivo2 = new File (linea+".txt");
-                fr2 = new FileReader (archivo2);
+            try {
+                archivo2 = new File(linea + ".txt");
+                fr2 = new FileReader(archivo2);
                 br2 = new BufferedReader(fr2);
                 String line;
-                while ((line = br2.readLine()) != null) {               
-                    String[] p = line.split(",");                
-                       Pane bookView = createBookView(p[4]);
-                       galeria.getChildren().addAll(bookView);                               
-                   }
+                while ((line = br2.readLine()) != null) {
+                    String[] p = line.split(",");
+                    Pane bookView = createBookView(p[4]);
+                    galeria.getChildren().addAll(bookView);
+                }
             } catch (Exception ex) {
                 System.out.println(ex.getLocalizedMessage());
                 ex.printStackTrace();
             }//eliminar archivo tmp
             archivo.delete();
-      }
-      catch(Exception e){
-         e.printStackTrace();
-      }                       
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    
-    private void showName(){ 
+
+    private void showName() {
         File archivo = null;
         FileReader fr = null;
         BufferedReader br = null;
-        
-        try {
-         archivo = new File ("tmp.txt");
-         fr = new FileReader (archivo);
-         br = new BufferedReader(fr);
 
-         // Lectura del fichero
-         String linea;
-         linea=br.readLine();
-         album.setText(linea);
-         archivo.delete();
-      }
-      catch(Exception e){
-         e.printStackTrace();
-      }                
-    }     
+        try {
+            archivo = new File("tmp.txt");
+            fr = new FileReader(archivo);
+            br = new BufferedReader(fr);
+
+            // Lectura del fichero
+            String linea;
+            linea = br.readLine();
+            album.setText(linea);
+            archivo.delete();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

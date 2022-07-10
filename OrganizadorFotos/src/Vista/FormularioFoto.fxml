@@ -42,6 +42,7 @@
             <ComboBox fx:id="cbAlbum" prefHeight="25.0" prefWidth="251.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Button mnemonicParsing="false" onAction="#btnSeleccionarRutaFoto" text="Seleccionar Ruta:" GridPane.rowIndex="6" />
             <TextField fx:id="txtRutaFoto" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="txtPersonas" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
       <ImageView fx:id="imageviewFoto" fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" />

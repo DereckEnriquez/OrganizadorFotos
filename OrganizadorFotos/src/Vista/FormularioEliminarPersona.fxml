@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="Controlador.FormularioEliminarPersonaController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.FormularioEliminarPersonaController">
    <children>
       <Label layoutX="263.0" layoutY="21.0" text="Eliminar Persona" />
       <GridPane layoutX="100.0" layoutY="98.0" prefHeight="203.0" prefWidth="413.0">
@@ -23,9 +22,9 @@
         </rowConstraints>
          <children>
             <Label text="Seleccionar Foto" />
-            <ComboBox fx:id="cmbFotos" onAction="#clickcmbFotos" prefWidth="150.0" promptText="cmbFotos" GridPane.columnIndex="1" />
+            <ComboBox fx:id="cmbFotos" onAction="#clickcmbFotos" prefWidth="150.0" GridPane.columnIndex="1" />
             <Label text="Seleccionar Persona" GridPane.rowIndex="1" />
-            <ComboBox fx:id="cmbPersonas" prefWidth="150.0" promptText="cmbPersonas" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox fx:id="cmbPersonas" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </children>
