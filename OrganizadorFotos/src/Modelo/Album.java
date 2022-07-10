@@ -1,7 +1,6 @@
 package Modelo;
 
 import Controlador.Main;
-import Controlador.VentanaController;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -24,7 +23,7 @@ public class Album implements Comparable<CircularDoubleLinkedList>{
         retorna true si ya existe el nombre, falso si no existe
     */
     public static boolean validacionNombre(String nombre){
-            try (InputStream input = Main.class.getResourceAsStream("/Archivos/albums.txt");
+            try (InputStream input = Main.class.getResourceAsStream("albunes.txt");
             BufferedReader bf = new BufferedReader(new InputStreamReader(input, "UTF-8"))){
                 
             String linea;

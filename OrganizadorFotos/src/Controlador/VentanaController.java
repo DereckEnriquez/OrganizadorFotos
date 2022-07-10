@@ -3,11 +3,9 @@ package Controlador;
 import Modelo.Album;
 import Modelo.CircularDoubleLinkedList;
 import Modelo.Foto;
-import java.awt.Font;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -23,24 +21,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -80,28 +73,22 @@ public class VentanaController implements Initializable {
 
     @FXML
     private void irFormularioAlbumfxml(ActionEvent event) throws IOException {
-        /*FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vista/FormularioAlbum.fxml"));
-        Parent root = loader.load();
-        FormularioAlbumController controlador = loader.getController(); //VentanaController ???
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setScene(scene);
-        stage.showAndWait();*/
         Main.setRoot("/Vista/FormularioAlbum");
     }
 
     @FXML
     public void irFormularioFotoFxml(ActionEvent event) throws IOException {
-        /*FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vista/FormularioFoto.fxml"));
-        Parent root = loader.load();
-        FormularioFotoController controlador = loader.getController(); //VentanaController ???
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setScene(scene);
-        stage.showAndWait();*/
         Main.setRoot("/Vista/FormularioFoto");
+    }
+    
+    @FXML
+    private void irFormularioEliminarAlbumfxml(ActionEvent event) throws IOException {
+        Main.setRoot("/Vista/FormularioEliminarAlbum");
+    }
+
+    @FXML
+    private void irFormularioEliminarFotofxml(ActionEvent event) throws IOException {
+        Main.setRoot("/Vista/FormularioEliminarFoto");
     }
 
     public void EscribirAlbumTxt(FileWriter fichero, PrintWriter pw, CircularDoubleLinkedList<Foto> album) {
@@ -121,21 +108,6 @@ public class VentanaController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-            /*fichero = new FileWriter("albums.txt", true);
-            pw = new PrintWriter(fichero);
-            pw.println(album.getNombreAlbum() + "," + album.getDescripcion());
-        } catch (Exception e) {
-            System.out.println(e);;
-        } finally {
-            try {
-                if (null != fichero) {
-                    fichero.close();
-                }
-            } catch (Exception e2) {
-                System.out.println(e2);;
-            }
-        }*/
         vbTitulos.getChildren().add(new Text(album.getNombreAlbum()));
     }
     
@@ -222,11 +194,7 @@ public class VentanaController implements Initializable {
                 bookView.getChildren().add(titleLabel);
                 titleLabel.setOnMouseClicked(event -> {
                 namee = titleLabel.getText();
-                
-                //escribir un nuevo archivo -> temporal para guardar el nombre del album seleccionado
-                
-                //String nombre = "/Archivos/tmp.txt";
-                
+      
                 try {
                     String ruta = "tmp.txt";                    
                     File file = new File(ruta);
@@ -241,32 +209,6 @@ public class VentanaController implements Initializable {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                
-                
-                
-                
-                /*FileWriter fichero = null;
-                PrintWriter pw = null;
-                try {
-           
-                fichero = new FileWriter("src\\Archivos\\tmp.txt", true);
-                pw = new PrintWriter(fichero);
-                   
-                pw.println(namee);
-
-                } catch (Exception e) {
-                    System.out.println(e);;
-                } finally {
-                    try {
-                        if (null != fichero) {
-                            fichero.close();
-                        }
-                    } catch (Exception e2) {
-                        System.out.println(e2);;
-                    }
-                }*/
-                
-                // al seleccionar el nombre del album, se abriran las fotos del mismo
                 try {                    
                     Main.setRoot("/Vista/MostrarFotosAlbum");
                 } catch (IOException ex) {

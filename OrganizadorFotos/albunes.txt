@@ -1,4 +1,1 @@
-P4album,ne
-P1Album,new
-P2Album,new
-P3Album,new
+Biblioteca,allphotos

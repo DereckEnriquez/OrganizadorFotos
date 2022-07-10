@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="710.0" style="-fx-background-color: #EFF6EE;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VentanaController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="710.0" style="-fx-background-color: #EFF6EE;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VentanaController">
    <center>
       <Pane id="panel" fx:id="panel" prefHeight="474.0" prefWidth="637.0" BorderPane.alignment="CENTER">
          <padding>
@@ -43,13 +43,14 @@
           <Menu mnemonicParsing="false" text="Archivo">
             <items>
                   <MenuItem mnemonicParsing="false" onAction="#irFormularioAlbumfxml" text="Crear álbum" />
-                  <MenuItem mnemonicParsing="false" onAction="#irFormularioFotoFxml" text="Importar fotos" />
+                  <MenuItem mnemonicParsing="false" onAction="#irFormularioFotoFxml" text="Importar foto" />
                   <MenuItem mnemonicParsing="false" onAction="#salirmenu" text="Salir" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="Editar">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" onAction="#irFormularioEliminarAlbumfxml" text="Eliminar álbum" />
+                  <MenuItem mnemonicParsing="false" onAction="#irFormularioEliminarFotofxml" text="Eliminar foto" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

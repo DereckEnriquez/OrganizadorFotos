@@ -38,8 +38,7 @@ public class FormularioAlbumController implements Initializable {
         // TODO
     }
 
-    
-        //CREA UN ALBUM representado en un .txt con su nombre ingresado
+    //CREA UN ALBUM representado en un .txt con su nombre ingresado
     //añade ese album al album.txt que estan todos los nombres de los albums 
     @FXML
     private void btnCrear(ActionEvent event) throws IOException {
@@ -47,15 +46,11 @@ public class FormularioAlbumController implements Initializable {
         String DescripcionAlbum = this.txtDescripcionAlbum.getText();
         System.out.println("clic btn crear album");
         CircularDoubleLinkedList<Foto> album = new CircularDoubleLinkedList(nombreAlbum, DescripcionAlbum);
-        
-       // System.out.println("ALBUM CREADO: " + album.getNombreAlbum());
-       // System.out.println("Descripcion:" + album.getDescripcion() + "\n");
-        
-        
+
         try {
             //Validación Nombre
             System.out.println("Validacion nOMBRE");
-            if(Album.validacionNombre(nombreAlbum)){
+            if (Album.validacionNombre(nombreAlbum)) {
                 System.out.println("YA EXISTE ESTE NOMBRE");
                 Alert mensaje = new Alert(Alert.AlertType.ERROR);
                 mensaje.setTitle("Error");
@@ -72,70 +67,48 @@ public class FormularioAlbumController implements Initializable {
                 contenido.setMaxWidth(Double.MAX_VALUE);
                 contenido.add(label, 0, 0);
                 contenido.add(txtArea, 0, 1);
-                
+
                 mensaje.getDialogPane().setExpandableContent(contenido);
                 mensaje.showAndWait();
-                
-            }else{
-            
-            //escribir un nuevo archivo -> album
-            try {
-                    String ruta = ".txt";                    
-                    File file = new File(nombreAlbum+ruta);
+
+            } else {
+
+                //escribir un nuevo archivo -> album
+                try {
+                    String ruta = ".txt";
+                    File file = new File(nombreAlbum + ruta);
                     // Si el archivo no existe es creado
                     if (!file.exists()) {
                         file.createNewFile();
-                    }                    
-            } catch (Exception e) {
+                    }
+                } catch (Exception e) {
                     e.printStackTrace();
-            }
-            //escribir en el archivo de albunes.txt que solo lleva la base de datos de los albunes creados y su descripcion
-            
-            try {
-                    String ruta = "albunes.txt";                    
-                    File file = new File(ruta);                    
-                    FileWriter fw = new FileWriter(file,true);
-                    PrintWriter l = new PrintWriter(fw);                   
-                    l.println(album.getNombreAlbum()+","+album.getDescripcion());
+                }
+
+//escribir en el archivo de albunes.txt que solo lleva la base de datos de los albunes creados y su descripcion
+                try {
+                    String ruta = "albunes.txt";
+                    File file = new File(ruta);
+                    FileWriter fw = new FileWriter(file, true);
+                    PrintWriter l = new PrintWriter(fw);
+                    l.println(album.getNombreAlbum() + "," + album.getDescripcion());
                     l.close();
                     fw.close();
-            } catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
-            }
-            /*fichero = new FileWriter("src\\Archivos\\"+nombreAlbum+".txt", true);
-            pw = new PrintWriter(fichero);
-            pw.println(album.getNombreAlbum() + "," + album.getDescripcion() + "," + album);
-            
-            //escribir en el archivo de albums.txt que solo lleva la base de datos de los albunes creados y su descripcion
-            fichero = new FileWriter("src\\Archivos\\albums.txt", true);
-            pw = new PrintWriter(fichero);
-            pw.println(album.getNombreAlbum() + "," + album.getDescripcion());
-            }
-        } catch (Exception e) {
-            System.out.println(e);;
-        } finally {
-            try {
-                if (null != fichero) {
-                    fichero.close();
                 }
-            } catch (Exception e2) {
-                System.out.println(e2);;
-            }
-        }
-        fichero.close();*/
             }
         } catch (Exception e) {
             System.out.println(e);
         }
     }
-    
-    
-@FXML
-        private void btnSalir(ActionEvent event) {
-            try {
+
+    @FXML
+    private void btnSalir(ActionEvent event) {
+        try {
             Main.setRoot("/Vista/Ventana");
         } catch (IOException ex) {
-            Alert a=new Alert(Alert.AlertType.ERROR,"Error");
+            Alert a = new Alert(Alert.AlertType.ERROR, "Error");
             a.show();
         }
     }
@@ -155,6 +128,5 @@ public class FormularioAlbumController implements Initializable {
     public void setTxtDescripcionAlbum(TextField txtDescripcionAlbum) {
         this.txtDescripcionAlbum = txtDescripcionAlbum;
     }
-    
-        
+
 }

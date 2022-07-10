@@ -56,7 +56,7 @@ public class FormularioFotoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         llenarComboBox();
-        ActualizarComboBox();
+        actualizarComboBox();
     }
 
     @FXML
@@ -97,13 +97,11 @@ public class FormularioFotoController implements Initializable {
         String lugarFoto = this.txtLugarFoto.getText();
         LocalDate fechaFoto = this.txtDateFoto.getValue();
         String albumSeleccionado = this.cbAlbum.getValue();
+        //personas ????
         String rutaSeleccionado = this.txtRutaFoto.getText();
         System.out.println("clic btn crear album");
-        // Foto fotonueva = new Foto(nombreFoto,descripcionFoto,lugarFoto,fechaFoto,rutaSeleccionado);
-        
 
-        
-        
+ 
         try {
             //escribir en un nuevo archivo -> album
             String ruta = ".txt";                    
@@ -113,29 +111,16 @@ public class FormularioFotoController implements Initializable {
             l.println(nombreFoto + "," + descripcionFoto + "," + lugarFoto + "," + fechaFoto + "," + rutaSeleccionado);
             l.close();
             fw.close();            
-            //fichero = new FileWriter(albumSeleccionado + ".txt");
-            //pw = new PrintWriter(fichero);
-            //pw.println(nombreFoto + "," + descripcionFoto + "," + lugarFoto + "," + fechaFoto + "," + rutaSeleccionado);
-
+          
         } catch (Exception e) {
             System.out.println(e);;
         } 
-        /*finally {
-            try {
-                if (null != fichero) {
-                    fichero.close();
-                }
-            } catch (Exception e2) {
-                System.out.println(e2);;
-            }
-        }*/
         txtNombreFoto.clear();
         txtDescripcionFoto.clear();
         txtLugarFoto.clear();
         txtRutaFoto.clear();
         imageviewFoto.getImage().cancel();
-       
-        ActualizarComboBox();
+        actualizarComboBox();
     }
 
     @FXML
@@ -153,14 +138,11 @@ public class FormularioFotoController implements Initializable {
         FileReader fr = null;
         BufferedReader br = null;
         try{
-        //try (InputStream input = Main.class.getResourceAsStream("/Archivos/albums.txt");
-        //        BufferedReader bf = new BufferedReader(new InputStreamReader(input, "UTF-8"))) {
             archivo = new File ("albunes.txt");
             fr = new FileReader (archivo);
             br = new BufferedReader(fr);            
             String linea;            
             while ((linea = br.readLine()) != null) {
-                //System.out.println(linea);
                 String[] p = linea.split(",");
                 cbAlbum.getItems().add(p[0]);
             }
@@ -170,7 +152,7 @@ public class FormularioFotoController implements Initializable {
         }
     }
 
-    public void ActualizarComboBox() {
+    public void actualizarComboBox() {
         cbAlbum.getItems().clear();
         llenarComboBox();
     }

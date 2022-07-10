@@ -1,3 +1,0 @@
-Foto1,g,g,2022-07-16,C:\Users\icesajmsol\Downloads\auto5.jpg
-foto2,s,s,2022-07-08,C:\Users\icesajmsol\Downloads\imagen4.jpg
-full,ds,ff,2022-07-08,C:\Users\icesajmsol\Downloads\imagen2.jpg
