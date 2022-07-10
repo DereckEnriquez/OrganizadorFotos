@@ -5,11 +5,12 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="677.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VentanaController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="710.0" style="-fx-background-color: #EFF6EE;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VentanaController">
    <center>
       <Pane id="panel" fx:id="panel" prefHeight="474.0" prefWidth="637.0" BorderPane.alignment="CENTER">
          <padding>
@@ -19,15 +20,25 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </BorderPane.margin>
          <children>
-            <VBox fx:id="vbTitulos" prefHeight="200.0" prefWidth="641.0">
-               <children>
-                  <HBox fx:id="hbGaleria" prefHeight="200.0" prefWidth="566.0" />
-               </children>
-            </VBox>
+            <Text fill="#273043" fontSmoothingType="LCD" layoutX="86.0" layoutY="61.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="ORGANIZADOR DE FOTOS" textAlignment="CENTER">
+               <font>
+                  <Font name="Cooper Black" size="36.0" />
+               </font>
+            </Text>
+            <TilePane fx:id="album" layoutX="10.0" layoutY="126.0" prefHeight="364.0" prefWidth="650.0">
+               <opaqueInsets>
+                  <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+               </opaqueInsets>
+            </TilePane>
+            <Text layoutX="20.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Albunes Disponibles:">
+               <font>
+                  <Font name="Century Gothic" size="18.0" />
+               </font>
+            </Text>
          </children></Pane>
    </center>
    <top>
-      <MenuBar fx:id="menubar">
+      <MenuBar fx:id="menubar" prefWidth="710.0">
         <menus>
           <Menu mnemonicParsing="false" text="Archivo">
             <items>

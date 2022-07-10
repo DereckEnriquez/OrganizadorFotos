@@ -3,8 +3,11 @@ package Controlador;
 import Modelo.Album;
 import Modelo.CircularDoubleLinkedList;
 import Modelo.Foto;
+import java.awt.Font;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,17 +17,25 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -35,6 +46,7 @@ import javafx.stage.Stage;
  * @author Grupo6
  */
 public class VentanaController implements Initializable {
+    private String name = null;
 
     FileChooser exploradorArchivo = new FileChooser();
     @FXML
@@ -46,10 +58,9 @@ public class VentanaController implements Initializable {
     private MenuItem btnImportar;
 
     Stage stage = new Stage();
-    @FXML
-    private HBox hbGaleria;
-    @FXML
     private VBox vbTitulos;
+    @FXML
+    private TilePane album;
 
     @FXML
     private void salirmenu(ActionEvent event) {
@@ -59,6 +70,7 @@ public class VentanaController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         exploradorArchivo.setInitialDirectory(new File("C:"));
+        mostrar();
     }
 
     @FXML
@@ -150,6 +162,50 @@ public class VentanaController implements Initializable {
         }
         System.out.println("lista de albums llena:" + albums);
         return albums;
+    }
+    
+    private Pane createBookView() throws FileNotFoundException {
+        
+        VBox vbox = new VBox();        
+        final Image image = new Image(Main.class.getResourceAsStream("/Archivos/album.png"),150, 0, true, false);
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(160);
+        imageView.setFitHeight(145);
+        
+        vbox.getChildren().add(imageView);        
+        
+        return vbox;
+    }
+    private void mostrar (){
+        
+        try (InputStream input = Main.class.getResourceAsStream("/Archivos/albums.txt");
+                BufferedReader bf = new BufferedReader(new InputStreamReader(input, "UTF-8"))) {
+            String linea;
+            while ((linea = bf.readLine()) != null) {               
+                String[] p = linea.split(",");
+                
+                Label titleLabel = new Label(p[0]);
+                titleLabel.setMaxWidth(150);
+                titleLabel.setAlignment(Pos.CENTER); 
+                titleLabel.setTextFill(Color.web("#4D5382"));
+                titleLabel.setStyle("-fx-font-size: 20");
+                Pane bookView = createBookView();
+                bookView.getChildren().add(titleLabel);
+                titleLabel.setOnMouseClicked(event -> {
+                name = titleLabel.getText();
+                // al seleccionar el nombre del album, se abriran las fotos del mismo
+                try {
+                    Main.setRoot("");
+                } catch (IOException ex) {
+                    Logger.getLogger(VentanaController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                });
+                album.getChildren().addAll(bookView);                               
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+            ex.printStackTrace();
+        }
     }
 
 }
