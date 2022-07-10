@@ -58,7 +58,6 @@ public class FormularioFotoController implements Initializable {
 
     @FXML
     private void btnSeleccionarRutaFoto(ActionEvent event) {
-        ActualizarComboBox();
         File archivo;
         int resultado;
         buscarIMG Buscador = new buscarIMG();
@@ -73,7 +72,6 @@ public class FormularioFotoController implements Initializable {
             txtRutaFoto.setText(archivo.getAbsolutePath());
 
             try {
-                //ImageIcon ImgIcon = new ImageIcon(archivo.toString());
                 System.out.println("Entro al try");
                 System.out.println(archivo.getAbsolutePath());
 
@@ -82,9 +80,7 @@ public class FormularioFotoController implements Initializable {
                 imageviewFoto.setImage(image);
                 imageviewFoto.setPreserveRatio(true);
                 imageviewFoto.setSmooth(true);
-                imageviewFoto.setCache(true);
-                //Icon icono = new ImageIcon(ImgIcon.getImage().getScaledInstance(jLImg.getWidth(),jLImg.getHeight(),Image.SCALE_DEFAULT));
-                //JLImg.setIcon(icono);                
+                imageviewFoto.setCache(true);              
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Error al abrir: " + ex);
             }
@@ -93,7 +89,6 @@ public class FormularioFotoController implements Initializable {
 
     @FXML
     private void btnImportar(ActionEvent event) {
-        ActualizarComboBox();
         String nombreFoto = this.txtNombreFoto.getText();
         String descripcionFoto = this.txtDescripcionFoto.getText();
         String lugarFoto = this.txtLugarFoto.getText();
@@ -109,7 +104,7 @@ public class FormularioFotoController implements Initializable {
             //escribir un nuevo archivo -> album
             fichero = new FileWriter("src\\Archivos\\" + albumSeleccionado + ".txt", true);
             pw = new PrintWriter(fichero);
-            pw.println(nombreFoto + "," + descripcionFoto + "," + lugarFoto + "," + fechaFoto + "," + albumSeleccionado + "," + rutaSeleccionado);
+            pw.println(nombreFoto + "," + descripcionFoto + "," + lugarFoto + "," + fechaFoto + "," + rutaSeleccionado);
 
         } catch (Exception e) {
             System.out.println(e);;
@@ -126,6 +121,8 @@ public class FormularioFotoController implements Initializable {
         txtDescripcionFoto.clear();
         txtLugarFoto.clear();
         txtRutaFoto.clear();
+        imageviewFoto.getImage().cancel();
+       
         ActualizarComboBox();
     }
 

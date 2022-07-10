@@ -108,14 +108,14 @@ public class VentanaController implements Initializable {
         CircularDoubleLinkedList<Foto> fotos = new CircularDoubleLinkedList<>();
         System.out.println("lista de fotos creada:" + fotos);
 
-        try (InputStream input = Main.class.getResourceAsStream("/Archivos/photos.txt");
+        try (InputStream input = Main.class.getResourceAsStream("/Archivos/biblioteca.txt");
                 BufferedReader bf = new BufferedReader(new InputStreamReader(input, "UTF-8"))) {
 
             String linea;
             while ((linea = bf.readLine()) != null) {
                 System.out.println(linea);
                 String[] p = linea.split(",");
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate localDate = null;
                 localDate = LocalDate.parse(p[3], formatter);
                 Foto foto = new Foto(p[0], p[1], p[2], localDate, p[4]);
