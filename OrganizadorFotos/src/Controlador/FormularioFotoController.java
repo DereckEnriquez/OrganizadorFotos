@@ -90,6 +90,9 @@ public class FormularioFotoController implements Initializable {
         }
     }
 
+ 
+    
+    
     @FXML
     private void btnImportar(ActionEvent event) {
         String nombreFoto = this.txtNombreFoto.getText();
@@ -97,7 +100,9 @@ public class FormularioFotoController implements Initializable {
         String lugarFoto = this.txtLugarFoto.getText();
         LocalDate fechaFoto = this.txtDateFoto.getValue();
         String albumSeleccionado = this.cbAlbum.getValue();
-        //personas ????
+        String[] personasSeleccionadas = this.txtPersonas.getText().split(",");
+        
+        
         String rutaSeleccionado = this.txtRutaFoto.getText();
         System.out.println("clic btn crear album");
 
@@ -105,12 +110,26 @@ public class FormularioFotoController implements Initializable {
         try {
             //escribir en un nuevo archivo -> album
             String ruta = ".txt";                    
-            File file = new File(albumSeleccionado+ruta);                    
+            File file = new File(albumSeleccionado+ruta);   
+            
             FileWriter fw = new FileWriter(file,true);
             PrintWriter l = new PrintWriter(fw);                   
             l.println(nombreFoto + "," + descripcionFoto + "," + lugarFoto + "," + fechaFoto + "," + rutaSeleccionado);
             l.close();
             fw.close();            
+            
+            //escribir en un nuevo archivo con el nombre de la foto las persona(s)
+            for(int i=0; i<personasSeleccionadas.length; i++){
+                File file2 = new File(nombreFoto+ruta);                    
+                FileWriter fw2 = new FileWriter(file2,true);
+                PrintWriter l2 = new PrintWriter(fw2);    
+            
+                l2.println(personasSeleccionadas[i] + "," + lugarFoto);
+                l2.close();
+                fw2.close(); 
+            }
+            
+                
           
         } catch (Exception e) {
             System.out.println(e);;
@@ -120,9 +139,12 @@ public class FormularioFotoController implements Initializable {
         txtLugarFoto.clear();
         txtRutaFoto.clear();
         imageviewFoto.getImage().cancel();
+        
         actualizarComboBox();
     }
-
+    
+    
+    
     @FXML
     private void btnSalir(ActionEvent event) {
         try {
