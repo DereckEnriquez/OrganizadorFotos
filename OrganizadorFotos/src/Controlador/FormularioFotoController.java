@@ -135,7 +135,7 @@ public class FormularioFotoController implements Initializable {
                 BufferedReader bf = new BufferedReader(new InputStreamReader(input, "UTF-8"))) {
             String linea;
             while ((linea = bf.readLine()) != null) {
-                System.out.println(linea);
+                //System.out.println(linea);
                 String[] p = linea.split(",");
                 cbAlbum.getItems().add(p[0]);
             }

@@ -1,1 +1,2 @@
 fotoprueba1,hola,guayaquil,2022-07-01,C:\Users\Oscar Enrriquez\Desktop\I PAO 2022\ESTRUCTURAS DE DATOS\OrganizadorFotos\OrganizadorFotos\src\foto1.jpg
+asd,aaaa,duran,2022-07-04,C:\Users\Oscar Enrriquez\Desktop\test\foto2.jpg

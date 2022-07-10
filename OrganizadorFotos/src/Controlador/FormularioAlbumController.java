@@ -46,8 +46,8 @@ public class FormularioAlbumController implements Initializable {
         System.out.println("clic btn crear album");
         CircularDoubleLinkedList<Foto> album = new CircularDoubleLinkedList(nombreAlbum, DescripcionAlbum);
         
-        System.out.println("ALBUM CREADO: " + album.getNombreAlbum());
-        System.out.println("Descripcion:" + album.getDescripcion() + "\n");
+       // System.out.println("ALBUM CREADO: " + album.getNombreAlbum());
+       // System.out.println("Descripcion:" + album.getDescripcion() + "\n");
 
         FileWriter fichero = null;
         PrintWriter pw = null;

@@ -106,14 +106,12 @@ public class VentanaController implements Initializable {
 
     public static CircularDoubleLinkedList<Foto> leerFotos() {
         CircularDoubleLinkedList<Foto> fotos = new CircularDoubleLinkedList<>();
-        System.out.println("lista de fotos creada:" + fotos);
 
         try (InputStream input = Main.class.getResourceAsStream("/Archivos/biblioteca.txt");
                 BufferedReader bf = new BufferedReader(new InputStreamReader(input, "UTF-8"))) {
 
             String linea;
             while ((linea = bf.readLine()) != null) {
-                System.out.println(linea);
                 String[] p = linea.split(",");
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate localDate = null;
@@ -133,14 +131,12 @@ public class VentanaController implements Initializable {
     //album.txt es un archivo con todos los nombres de los albums 
     public static CircularDoubleLinkedList<Album> leerAlbums() {
         CircularDoubleLinkedList<Album> albums = new CircularDoubleLinkedList<>();
-        System.out.println("lista de albums creada:" + albums);
 
         try (InputStream input = Main.class.getResourceAsStream("/Archivos/albums.txt");
                 BufferedReader bf = new BufferedReader(new InputStreamReader(input, "UTF-8"))) {
 
             String linea;
             while ((linea = bf.readLine()) != null) {
-                System.out.println(linea);
                 String[] p = linea.split(",");
                 Album album = new Album(p[0], p[1]);
                 albums.addFirst(album);
