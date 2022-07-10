@@ -1,0 +1,7 @@
+Foto1,nnnn,Milagro,2022-07-10,C:\Users\icesajmsol\Downloads\auto1.jpg
+segunda,cds,cdsdc,2022-07-09,C:\Users\icesajmsol\Downloads\fotos-gratis-de-stock-1.jpg
+imagen2,nose,milagro,2022-07-16,C:\Users\icesajmsol\Downloads\auto1.jpg
+im2,ced,here,2022-07-16,C:\Users\icesajmsol\Downloads\imagen2.jpg
+im3,aqui,here,2022-07-16,C:\Users\icesajmsol\Downloads\imagen3.jpg
+im5,ds,ds,2022-07-16,C:\Users\icesajmsol\Downloads\imagen4.jpg
+im8,nn,milagro,2022-07-24,C:\Users\icesajmsol\Downloads\descarga.jpg

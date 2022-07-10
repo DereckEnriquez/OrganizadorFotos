@@ -5,6 +5,7 @@ import Modelo.CircularDoubleLinkedList;
 import Modelo.Foto;
 import java.awt.Font;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -46,7 +47,9 @@ import javafx.stage.Stage;
  * @author Grupo6
  */
 public class VentanaController implements Initializable {
-    private String name = null;
+
+             
+    public String namee = null;   
 
     FileChooser exploradorArchivo = new FileChooser();
     @FXML
@@ -192,10 +195,54 @@ public class VentanaController implements Initializable {
                 Pane bookView = createBookView();
                 bookView.getChildren().add(titleLabel);
                 titleLabel.setOnMouseClicked(event -> {
-                name = titleLabel.getText();
-                // al seleccionar el nombre del album, se abriran las fotos del mismo
+                namee = titleLabel.getText();
+                
+                //escribir un nuevo archivo -> temporal para guardar el nombre del album seleccionado
+                
+                //String nombre = "/Archivos/tmp.txt";
+                
                 try {
-                    Main.setRoot("");
+                    String ruta = "tmp.txt";                    
+                    File file = new File(ruta);
+                    // Si el archivo no existe es creado
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }
+                    FileWriter fw = new FileWriter(file);
+                    BufferedWriter bw = new BufferedWriter(fw);
+                    bw.write(namee);
+                    bw.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+        }
+                
+                
+                
+                
+                /*FileWriter fichero = null;
+                PrintWriter pw = null;
+                try {
+           
+                fichero = new FileWriter("src\\Archivos\\tmp.txt", true);
+                pw = new PrintWriter(fichero);
+                   
+                pw.println(namee);
+
+                } catch (Exception e) {
+                    System.out.println(e);;
+                } finally {
+                    try {
+                        if (null != fichero) {
+                            fichero.close();
+                        }
+                    } catch (Exception e2) {
+                        System.out.println(e2);;
+                    }
+                }*/
+                
+                // al seleccionar el nombre del album, se abriran las fotos del mismo
+                try {                    
+                    Main.setRoot("/Vista/MostrarFotosAlbum");
                 } catch (IOException ex) {
                     Logger.getLogger(VentanaController.class.getName()).log(Level.SEVERE, null, ex);
                 }
