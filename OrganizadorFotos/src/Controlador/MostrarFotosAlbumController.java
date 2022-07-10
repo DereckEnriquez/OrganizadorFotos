@@ -89,10 +89,6 @@ public class MostrarFotosAlbumController implements Initializable {
             // Lectura del fichero
             String linea;
             linea=br.readLine();
-            
-            //try (InputStream input = Main.class.getResourceAsStream("/Archivos/"+linea+".txt");
-            //    BufferedReader bf = new BufferedReader(new InputStreamReader(input, "UTF-8"))) {
-            
             File archivo2 = null;
             FileReader fr2 = null;
             BufferedReader br2 = null;
@@ -116,6 +112,7 @@ public class MostrarFotosAlbumController implements Initializable {
          e.printStackTrace();
       }                       
     }
+    
     private void showName(){ 
         File archivo = null;
         FileReader fr = null;
