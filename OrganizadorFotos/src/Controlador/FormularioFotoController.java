@@ -3,6 +3,7 @@ package Controlador;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -99,18 +100,27 @@ public class FormularioFotoController implements Initializable {
         String rutaSeleccionado = this.txtRutaFoto.getText();
         System.out.println("clic btn crear album");
         // Foto fotonueva = new Foto(nombreFoto,descripcionFoto,lugarFoto,fechaFoto,rutaSeleccionado);
+        
 
-        FileWriter fichero = null;
-        PrintWriter pw = null;
+        
+        
         try {
-            //escribir un nuevo archivo -> album
-            fichero = new FileWriter("src\\Archivos\\" + albumSeleccionado + ".txt", true);
-            pw = new PrintWriter(fichero);
-            pw.println(nombreFoto + "," + descripcionFoto + "," + lugarFoto + "," + fechaFoto + "," + rutaSeleccionado);
+            //escribir en un nuevo archivo -> album
+            String ruta = ".txt";                    
+            File file = new File(albumSeleccionado+ruta);                    
+            FileWriter fw = new FileWriter(file,true);
+            PrintWriter l = new PrintWriter(fw);                   
+            l.println(nombreFoto + "," + descripcionFoto + "," + lugarFoto + "," + fechaFoto + "," + rutaSeleccionado);
+            l.close();
+            fw.close();            
+            //fichero = new FileWriter(albumSeleccionado + ".txt");
+            //pw = new PrintWriter(fichero);
+            //pw.println(nombreFoto + "," + descripcionFoto + "," + lugarFoto + "," + fechaFoto + "," + rutaSeleccionado);
 
         } catch (Exception e) {
             System.out.println(e);;
-        } finally {
+        } 
+        /*finally {
             try {
                 if (null != fichero) {
                     fichero.close();
@@ -118,7 +128,7 @@ public class FormularioFotoController implements Initializable {
             } catch (Exception e2) {
                 System.out.println(e2);;
             }
-        }
+        }*/
         txtNombreFoto.clear();
         txtDescripcionFoto.clear();
         txtLugarFoto.clear();
@@ -139,10 +149,17 @@ public class FormularioFotoController implements Initializable {
     }
 
     public void llenarComboBox() {
-        try (InputStream input = Main.class.getResourceAsStream("/Archivos/albums.txt");
-                BufferedReader bf = new BufferedReader(new InputStreamReader(input, "UTF-8"))) {
-            String linea;
-            while ((linea = bf.readLine()) != null) {
+        File archivo = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+        try{
+        //try (InputStream input = Main.class.getResourceAsStream("/Archivos/albums.txt");
+        //        BufferedReader bf = new BufferedReader(new InputStreamReader(input, "UTF-8"))) {
+            archivo = new File ("albunes.txt");
+            fr = new FileReader (archivo);
+            br = new BufferedReader(fr);            
+            String linea;            
+            while ((linea = br.readLine()) != null) {
                 //System.out.println(linea);
                 String[] p = linea.split(",");
                 cbAlbum.getItems().add(p[0]);

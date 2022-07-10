@@ -3,6 +3,8 @@ package Controlador;
 import Modelo.Album;
 import Modelo.CircularDoubleLinkedList;
 import Modelo.Foto;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -48,9 +50,7 @@ public class FormularioAlbumController implements Initializable {
         
        // System.out.println("ALBUM CREADO: " + album.getNombreAlbum());
        // System.out.println("Descripcion:" + album.getDescripcion() + "\n");
-
-        FileWriter fichero = null;
-        PrintWriter pw = null;
+        
         
         try {
             //Validación Nombre
@@ -79,7 +79,30 @@ public class FormularioAlbumController implements Initializable {
             }else{
             
             //escribir un nuevo archivo -> album
-            fichero = new FileWriter("src\\Archivos\\"+nombreAlbum+".txt", true);
+            try {
+                    String ruta = ".txt";                    
+                    File file = new File(nombreAlbum+ruta);
+                    // Si el archivo no existe es creado
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }                    
+            } catch (Exception e) {
+                    e.printStackTrace();
+            }
+            //escribir en el archivo de albunes.txt que solo lleva la base de datos de los albunes creados y su descripcion
+            
+            try {
+                    String ruta = "albunes.txt";                    
+                    File file = new File(ruta);                    
+                    FileWriter fw = new FileWriter(file,true);
+                    PrintWriter l = new PrintWriter(fw);                   
+                    l.println(album.getNombreAlbum()+","+album.getDescripcion());
+                    l.close();
+                    fw.close();
+            } catch (Exception e) {
+                    e.printStackTrace();
+            }
+            /*fichero = new FileWriter("src\\Archivos\\"+nombreAlbum+".txt", true);
             pw = new PrintWriter(fichero);
             pw.println(album.getNombreAlbum() + "," + album.getDescripcion() + "," + album);
             
@@ -99,7 +122,11 @@ public class FormularioAlbumController implements Initializable {
                 System.out.println(e2);;
             }
         }
-        fichero.close();
+        fichero.close();*/
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
     
     

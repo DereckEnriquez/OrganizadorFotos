@@ -90,11 +90,19 @@ public class MostrarFotosAlbumController implements Initializable {
             String linea;
             linea=br.readLine();
             
-            try (InputStream input = Main.class.getResourceAsStream("/Archivos/"+linea+".txt");
-                BufferedReader bf = new BufferedReader(new InputStreamReader(input, "UTF-8"))) {
-                   String line;
-                   while ((line = bf.readLine()) != null) {               
-                       String[] p = line.split(",");                
+            //try (InputStream input = Main.class.getResourceAsStream("/Archivos/"+linea+".txt");
+            //    BufferedReader bf = new BufferedReader(new InputStreamReader(input, "UTF-8"))) {
+            
+            File archivo2 = null;
+            FileReader fr2 = null;
+            BufferedReader br2 = null;
+            try{
+                archivo2 = new File (linea+".txt");
+                fr2 = new FileReader (archivo2);
+                br2 = new BufferedReader(fr2);
+                String line;
+                while ((line = br2.readLine()) != null) {               
+                    String[] p = line.split(",");                
                        Pane bookView = createBookView(p[4]);
                        galeria.getChildren().addAll(bookView);                               
                    }
@@ -106,19 +114,7 @@ public class MostrarFotosAlbumController implements Initializable {
       }
       catch(Exception e){
          e.printStackTrace();
-      }                
-       /* try (InputStream input = Main.class.getResourceAsStream("/Archivos/"+""+".txt");
-                BufferedReader bf = new BufferedReader(new InputStreamReader(input, "UTF-8"))) {
-            String linea;
-            while ((linea = bf.readLine()) != null) {               
-                String[] p = linea.split(",");                
-                Pane bookView = createBookView(p[4]);
-                galeria.getChildren().addAll(bookView);                               
-            }
-        } catch (Exception ex) {
-            System.out.println(ex.getLocalizedMessage());
-            ex.printStackTrace();
-        }*/
+      }                       
     }
     private void showName(){ 
         File archivo = null;
@@ -139,19 +135,5 @@ public class MostrarFotosAlbumController implements Initializable {
       catch(Exception e){
          e.printStackTrace();
       }                
-    }
-    private String  getNombreAlbum() throws IOException{
-        String l = null;
-        try (InputStream input = Main.class.getResourceAsStream("/Archivos/tmp.txt");
-                BufferedReader bf = new BufferedReader(new InputStreamReader(input, "UTF-8"))) {
-            String linea;  
-            while ((linea = bf.readLine()) != null) {               
-                l=linea;                
-            }
-        } catch (Exception ex) {
-            System.out.println(ex.getLocalizedMessage());
-            ex.printStackTrace();
-        }       
-        return l;
-    }    
+    }     
 }

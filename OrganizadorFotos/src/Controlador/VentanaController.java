@@ -9,6 +9,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -74,6 +75,7 @@ public class VentanaController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         exploradorArchivo.setInitialDirectory(new File("C:"));
         mostrar();
+        
     }
 
     @FXML
@@ -103,8 +105,24 @@ public class VentanaController implements Initializable {
     }
 
     public void EscribirAlbumTxt(FileWriter fichero, PrintWriter pw, CircularDoubleLinkedList<Foto> album) {
+        
         try {
-            fichero = new FileWriter("src\\Archivos\\albums.txt", true);
+            String ruta = "albunes.txt"; 
+            File file = new File(ruta);
+            // Si el archivo no existe es creado
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(album.getNombreAlbum() + "," + album.getDescripcion());
+            bw.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+            /*fichero = new FileWriter("albums.txt", true);
             pw = new PrintWriter(fichero);
             pw.println(album.getNombreAlbum() + "," + album.getDescripcion());
         } catch (Exception e) {
@@ -117,10 +135,11 @@ public class VentanaController implements Initializable {
             } catch (Exception e2) {
                 System.out.println(e2);;
             }
-        }
+        }*/
         vbTitulos.getChildren().add(new Text(album.getNombreAlbum()));
     }
-
+    
+    // Este metodo no se pra ue es  XD att. Danilo
     public static CircularDoubleLinkedList<Foto> leerFotos() {
         CircularDoubleLinkedList<Foto> fotos = new CircularDoubleLinkedList<>();
 
@@ -144,6 +163,7 @@ public class VentanaController implements Initializable {
         System.out.println("lista de fotos llena:" + fotos);
         return fotos;
     }
+    // no lo utilizo nose donde va XD att. Danilo
 
     //album.txt es un archivo con todos los nombres de los albums 
     public static CircularDoubleLinkedList<Album> leerAlbums() {
@@ -180,11 +200,17 @@ public class VentanaController implements Initializable {
         return vbox;
     }
     private void mostrar (){
+        File archivo = null;
+        FileReader fr = null;
+        BufferedReader br = null;
         
-        try (InputStream input = Main.class.getResourceAsStream("/Archivos/albums.txt");
-                BufferedReader bf = new BufferedReader(new InputStreamReader(input, "UTF-8"))) {
+        try {
+            
+            archivo = new File ("albunes.txt");
+            fr = new FileReader (archivo);
+            br = new BufferedReader(fr);
             String linea;
-            while ((linea = bf.readLine()) != null) {               
+            while ((linea = br.readLine()) != null) {               
                 String[] p = linea.split(",");
                 
                 Label titleLabel = new Label(p[0]);
@@ -214,7 +240,7 @@ public class VentanaController implements Initializable {
                     bw.close();
                 } catch (Exception e) {
                     e.printStackTrace();
-        }
+                }
                 
                 
                 
