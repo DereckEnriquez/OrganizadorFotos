@@ -4,6 +4,7 @@ import Modelo.Album;
 import Modelo.CircularDoubleLinkedList;
 import Modelo.Foto;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -35,7 +36,7 @@ public class FormularioAlbumController implements Initializable {
     //CREA UN ALBUM representado en un .txt con su nombre ingresado
     //añade ese album al album.txt que estan todos los nombres de los albums 
     @FXML
-    private void btnCrear(ActionEvent event) {
+    private void btnCrear(ActionEvent event) throws IOException {
         String nombreAlbum = this.txtNombreAlbum.getText();
         String DescripcionAlbum = this.txtDescripcionAlbum.getText();
         System.out.println("clic btn crear album");
@@ -68,8 +69,7 @@ public class FormularioAlbumController implements Initializable {
                 System.out.println(e2);;
             }
         }
-        //vbTitulos.getChildren().add(new Text(album.getNombreAlbum()));
-
+        fichero.close();
     }
 
 

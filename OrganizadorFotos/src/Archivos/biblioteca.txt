@@ -1,2 +1,1 @@
-foto1,futbol,guayaquil,21/03/2022,Desktop\\test\\foto1.jpg
-foto2,futbol,guayaquil,21/03/2022,Desktop\\test\\foto2.jpg
+
