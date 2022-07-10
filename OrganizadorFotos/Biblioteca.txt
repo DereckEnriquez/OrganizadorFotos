@@ -1,0 +1,3 @@
+Prueba1,prub1,Guayquil,2022-07-08,C:\Users\jeanf\Documents\ESPOL\Estructura de Datos\Parcial 1\PROYECTO\OrganizadorFotos\OrganizadorFotos\src\Archivos\foto1.jpg
+Prueba2,prub2,Quito,2022-07-08,C:\Users\jeanf\Documents\ESPOL\Estructura de Datos\Parcial 1\PROYECTO\OrganizadorFotos\OrganizadorFotos\src\Archivos\album.png
+Prueba3,prub3,Duran,2022-07-08,C:\Users\jeanf\Pictures\Saved Pictures\babyyoda.PNG

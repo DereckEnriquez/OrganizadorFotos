@@ -22,6 +22,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 
 /**
@@ -38,6 +39,8 @@ public class FormularioEliminarPersonaController<E> implements Initializable {
     
     private  ObservableList<String> fotos;
     private  ObservableList<String> personas;
+    @FXML
+    private Button btnEliminarPerson;
 
 
     /**
@@ -66,7 +69,7 @@ public class FormularioEliminarPersonaController<E> implements Initializable {
     }    
 
     @FXML
-    private void clickcmbFotos(ActionEvent event) {
+    private void clickcmbFotos(ActionEvent event){
         String nameFoto = (String) cmbFotos.getValue();
         
         try{
@@ -82,7 +85,6 @@ public class FormularioEliminarPersonaController<E> implements Initializable {
                 String temp = "";
                 temp = fl.concat(scan.nextLine().split(",")[0]);
                 personas.add(temp);
-                System.out.println(temp);
             }
 
             cmbPersonas.setItems((ObservableList<E>) personas);
@@ -93,6 +95,25 @@ public class FormularioEliminarPersonaController<E> implements Initializable {
             //ex.printStackTrace();
         }
         
+        
+    }
+
+    @FXML
+    private void clickEliminarPersona(ActionEvent event) throws IOException {
+        File file=new File((String) cmbFotos.getValue()+".txt");
+        Scanner scan=new Scanner(file);
+        String fileContent="";
+        while(scan.hasNextLine()){
+            String[] extracto = scan.nextLine().split(",");
+            if(!extracto[0].equalsIgnoreCase((String) cmbPersonas.getValue())){
+                fileContent=fileContent.concat(extracto[0]+","+extracto[1]+"\n");                
+            }
+            
+            
+        }
+        FileWriter writer=new FileWriter((String) cmbFotos.getValue()+".txt");
+        writer.write(fileContent);
+        writer.close();
         
     }
     
