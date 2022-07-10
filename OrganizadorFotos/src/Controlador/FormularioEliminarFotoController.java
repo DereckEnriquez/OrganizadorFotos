@@ -96,7 +96,7 @@ public class FormularioEliminarFotoController implements Initializable {
 
     @FXML
     private void btnSalir(ActionEvent event) throws IOException {
-         Main.setRoot("/Vista/Ventana");
+        Main.setRoot("/Vista/Ventana");
     }
 
     public void llenarComboBoxAlbum() {
@@ -125,7 +125,8 @@ public class FormularioEliminarFotoController implements Initializable {
         BufferedReader br = null;
         try {
             String nombrealbum = this.cbAlbum.getValue();
-            archivo = new File("pruebaeliminar.txt");
+           // archivo = new File("pruebaeliminar.txt");
+            archivo = new File(nombrealbum + ".txt");
             fr = new FileReader(archivo);
             br = new BufferedReader(fr);
             String linea;
@@ -145,4 +146,14 @@ public class FormularioEliminarFotoController implements Initializable {
         llenarComboBoxAlbum();
         llenarComboBoxFoto();
     }
+
+    @FXML
+    private void cbEvent(ActionEvent e) {
+        Object evt = e.getSource();
+        if (evt.equals(cbAlbum)) {
+            cbFoto.getItems().removeAll(cbFoto.getItems());
+            llenarComboBoxFoto();
+        }
+    }
+
 }
