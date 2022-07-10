@@ -33,7 +33,8 @@ public class FormularioAlbumController implements Initializable {
         // TODO
     }
 
-    //CREA UN ALBUM representado en un .txt con su nombre ingresado
+    
+        //CREA UN ALBUM representado en un .txt con su nombre ingresado
     //añade ese album al album.txt que estan todos los nombres de los albums 
     @FXML
     private void btnCrear(ActionEvent event) throws IOException {
@@ -49,6 +50,31 @@ public class FormularioAlbumController implements Initializable {
         PrintWriter pw = null;
         
         try {
+            //Validación Nombre
+            System.out.println("Validacion nOMBRE");
+            if(Album.validacionNombre(nombreAlbum)){
+                System.out.println("YA EXISTE ESTE NOMBRE");
+                Alert mensaje = new Alert(Alert.AlertType.ERROR);
+                mensaje.setTitle("Error");
+                mensaje.setContentText("Nombre Existente");
+                Label label = new Label("El error es el siguiente:");
+                TextArea txtArea = new TextArea("El nombre del Album ya existe, debe colocar otro");
+                txtArea.setEditable(false);
+                txtArea.setWrapText(true);
+                txtArea.setMaxWidth(Double.MAX_VALUE);
+                txtArea.setMaxHeight(Double.MAX_VALUE);
+                GridPane.setVgrow(txtArea, Priority.ALWAYS);
+                GridPane.setHgrow(txtArea, Priority.ALWAYS);
+                GridPane contenido = new GridPane();
+                contenido.setMaxWidth(Double.MAX_VALUE);
+                contenido.add(label, 0, 0);
+                contenido.add(txtArea, 0, 1);
+                
+                mensaje.getDialogPane().setExpandableContent(contenido);
+                mensaje.showAndWait();
+                
+            }else{
+            
             //escribir un nuevo archivo -> album
             fichero = new FileWriter("src\\Archivos\\"+nombreAlbum+".txt", true);
             pw = new PrintWriter(fichero);
@@ -58,6 +84,7 @@ public class FormularioAlbumController implements Initializable {
             fichero = new FileWriter("src\\Archivos\\albums.txt", true);
             pw = new PrintWriter(fichero);
             pw.println(album.getNombreAlbum() + "," + album.getDescripcion());
+            }
         } catch (Exception e) {
             System.out.println(e);;
         } finally {
@@ -71,8 +98,8 @@ public class FormularioAlbumController implements Initializable {
         }
         fichero.close();
     }
-
-
+    
+    
 @FXML
         private void btnSalir(ActionEvent event) {
     }
