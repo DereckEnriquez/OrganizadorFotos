@@ -32,7 +32,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Dereck Enríquez
+ * @author Grupo6
  */
 public class VentanaController implements Initializable {
 
@@ -63,26 +63,28 @@ public class VentanaController implements Initializable {
 
     @FXML
     private void irFormularioAlbumfxml(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vista/FormularioAlbum.fxml"));
+        /*FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vista/FormularioAlbum.fxml"));
         Parent root = loader.load();
         FormularioAlbumController controlador = loader.getController(); //VentanaController ???
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
-        stage.showAndWait();
+        stage.showAndWait();*/
+        Main.setRoot("/Vista/FormularioAlbum");
     }
 
     @FXML
     public void irFormularioFotoFxml(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vista/FormularioFoto.fxml"));
+        /*FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vista/FormularioFoto.fxml"));
         Parent root = loader.load();
         FormularioFotoController controlador = loader.getController(); //VentanaController ???
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
-        stage.showAndWait();
+        stage.showAndWait();*/
+        Main.setRoot("/Vista/FormularioFoto");
     }
 
     public void EscribirAlbumTxt(FileWriter fichero, PrintWriter pw, CircularDoubleLinkedList<Foto> album) {

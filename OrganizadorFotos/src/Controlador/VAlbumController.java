@@ -21,7 +21,7 @@ import javafx.scene.input.MouseEvent;
 /**
  * FXML Controller class
  *
- * @author jeanf
+ * @author GRupo6
  */
 public class VAlbumController <E> implements Initializable {
 

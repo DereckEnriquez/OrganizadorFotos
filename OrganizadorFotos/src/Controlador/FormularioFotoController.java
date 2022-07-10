@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -13,6 +14,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -25,7 +27,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  * FXML Controller class
  *
- * @author Dereck Enríquez
+ * @author Grupo6
  */
 public class FormularioFotoController implements Initializable {
 
@@ -128,6 +130,12 @@ public class FormularioFotoController implements Initializable {
 
     @FXML
     private void btnSalir(ActionEvent event) {
+        try {
+            Main.setRoot("/Vista/Ventana");
+        } catch (IOException ex) {
+            Alert a=new Alert(Alert.AlertType.ERROR,"Error");
+            a.show();
+        }
     }
 
     public void llenarComboBox() {

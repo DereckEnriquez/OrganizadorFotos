@@ -19,7 +19,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 
 /**
- * @author Dereck Enríquez
+ * @author Grupo6
  */
 public class FormularioAlbumController implements Initializable {
 
@@ -105,6 +105,12 @@ public class FormularioAlbumController implements Initializable {
     
 @FXML
         private void btnSalir(ActionEvent event) {
+            try {
+            Main.setRoot("/Vista/Ventana");
+        } catch (IOException ex) {
+            Alert a=new Alert(Alert.AlertType.ERROR,"Error");
+            a.show();
+        }
     }
 
     public TextField getTxtNombreAlbum() {
