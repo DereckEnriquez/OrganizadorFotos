@@ -54,7 +54,6 @@ public class VentanaController implements Initializable {
     @FXML
     private Pane panel;
 
-    @FXML
     private MenuItem btnImportar;
 
     Stage stage = new Stage();
@@ -62,17 +61,6 @@ public class VentanaController implements Initializable {
     private HBox hbGaleria;
     @FXML
     private VBox vbTitulos;
-    @FXML
-    private TextField jLDireccion;
-    @FXML
-    private Label jLDireccion2;
-    private ImageView Icon;
-    @FXML
-    private ImageView foto1;
-
-    File archivo;
-
-    static CircularDoubleLinkedList<Foto> fotos;
 
     @FXML
     private void salirmenu(ActionEvent event) {
@@ -82,67 +70,30 @@ public class VentanaController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         exploradorArchivo.setInitialDirectory(new File("C:"));
-        /*for (Foto ca : fotos) {
-            InputStream input = null;
-            try {
-                //elementos graficos de la escena
-                input = App.class.getResource(ca.getRutaImagen()).openStream();
-                Image imagen = new Image(input, 75, 75, true, true);
-                ImageView imgview = new ImageView(imagen);
-                //creacion de una casa generica
-                StackPane st = new StackPane();
-                st.getChildren().addAll(imgview);
-                //agregar el stackpane al PanelCasas
-                PanelCasas.getChildren().addAll(st);
-
-                //fijar la ubicacion del st en la ubicacion del casa
-                st.setLayoutX(ca.getUbicacion().getX());
-                st.setLayoutY(ca.getUbicacion().getY());
-                //evento que al pasar el mouse muestra la informacion de la casa deseada
-            
-        }
-    }*/
     }
 
     @FXML
-    private void importarFoto() {
-        btnImportar.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                int resultado;
-                buscarIMG Buscador = new buscarIMG();
-                FileNameExtensionFilter formato = new FileNameExtensionFilter("JPG", "PNG", "GIF", "jpg", "png", "gif");
+    private void irFormularioAlbumfxml(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vista/FormularioAlbum.fxml"));
+        Parent root = loader.load();
+        FormularioAlbumController controlador = loader.getController(); //VentanaController ???
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.showAndWait();
+    }
 
-                Buscador.JFCImg.setFileFilter(formato);
-                resultado = Buscador.JFCImg.showOpenDialog(null);
-
-                if (JFileChooser.APPROVE_OPTION == resultado) {
-                    archivo = Buscador.JFCImg.getSelectedFile();
-
-                    jLDireccion.setText(archivo.getAbsolutePath());
-
-                    try {
-                        //ImageIcon ImgIcon = new ImageIcon(archivo.toString());
-                        System.out.println("Entro al try");
-                        System.out.println(archivo.getAbsolutePath());
-
-                        
-                        FileInputStream input = new FileInputStream(archivo);
-                        Image image = new Image(input);
-                        foto1.setImage(image);
-                        foto1.setPreserveRatio(true);
-                        foto1.setSmooth(true);
-                        foto1.setCache(true);
-                        //Icon icono = new ImageIcon(ImgIcon.getImage().getScaledInstance(jLImg.getWidth(),jLImg.getHeight(),Image.SCALE_DEFAULT));
-                        //JLImg.setIcon(icono);                
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(null, "Error al abrir" + ex);
-
-                    }
-
-                }
-            }
-        });
+    @FXML
+    private void irFormularioFotoFxml(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vista/FormularioFoto.fxml"));
+        Parent root = loader.load();
+        FormularioFotoController controlador = loader.getController(); //VentanaController ???
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 
     public void EscribirAlbumTxt(FileWriter fichero, PrintWriter pw, CircularDoubleLinkedList<Foto> album) {
@@ -222,16 +173,4 @@ public class VentanaController implements Initializable {
         return albums;
     }
 
-    @FXML
-    private void irFormulariofxml(ActionEvent event) throws IOException {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vista/FormularioAlbum.fxml"));
-        Parent root = loader.load();
-        FormularioAlbumController controlador = loader.getController(); //VentanaController ???
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setScene(scene);
-        stage.showAndWait();
-    }
 }

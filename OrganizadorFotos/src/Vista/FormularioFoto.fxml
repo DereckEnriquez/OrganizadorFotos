@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1" fx:controller="Controlador.FormularioFotoController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.FormularioFotoController">
    <children>
       <Text layoutX="263.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Importar Foto" />
       <GridPane layoutX="113.0" layoutY="38.0" prefHeight="162.0" prefWidth="375.0">
@@ -45,7 +44,7 @@
             <TextField fx:id="txtRutaFoto" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
       </GridPane>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imageviewFoto" fitHeight="150.0" fitWidth="200.0" layoutX="201.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" />
       <Button layoutX="175.0" layoutY="362.0" mnemonicParsing="false" onAction="#btnImportar" text="Importar" />
       <Button layoutX="436.0" layoutY="362.0" mnemonicParsing="false" onAction="#btnSalir" text="Salir" />
    </children>

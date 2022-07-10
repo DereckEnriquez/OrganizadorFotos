@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -24,12 +21,7 @@
          <children>
             <VBox fx:id="vbTitulos" prefHeight="200.0" prefWidth="641.0">
                <children>
-                  <Label fx:id="jLDireccion2" prefHeight="18.0" prefWidth="438.0" text="Label" />
-                  <HBox fx:id="hbGaleria" prefHeight="200.0" prefWidth="566.0">
-                     <children>
-                        <TextField fx:id="jLDireccion" />
-                        <ImageView fx:id="foto1" fitHeight="257.0" fitWidth="374.0" pickOnBounds="true" preserveRatio="true" />
-                     </children></HBox>
+                  <HBox fx:id="hbGaleria" prefHeight="200.0" prefWidth="566.0" />
                </children>
             </VBox>
          </children></Pane>
@@ -39,8 +31,8 @@
         <menus>
           <Menu mnemonicParsing="false" text="Archivo">
             <items>
-                  <MenuItem mnemonicParsing="false" onAction="#irFormulariofxml" text="Crear álbum" />
-                  <MenuItem fx:id="btnImportar" mnemonicParsing="false" onAction="#importarFoto" text="Importar fotos" />
+                  <MenuItem mnemonicParsing="false" onAction="#irFormularioAlbumfxml" text="Crear álbum" />
+                  <MenuItem mnemonicParsing="false" onAction="#irFormularioFotoFxml" text="Importar fotos" />
                   <MenuItem mnemonicParsing="false" onAction="#salirmenu" text="Salir" />
             </items>
           </Menu>
