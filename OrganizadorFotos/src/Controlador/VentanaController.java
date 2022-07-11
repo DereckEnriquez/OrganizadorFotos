@@ -145,7 +145,7 @@ public class VentanaController implements Initializable {
     public static CircularDoubleLinkedList<Album> leerAlbums() {
         CircularDoubleLinkedList<Album> albums = new CircularDoubleLinkedList<>();
 
-        try (InputStream input = Main.class.getResourceAsStream("/Archivos/albums.txt");
+        try (InputStream input = Main.class.getResourceAsStream("albunes.txt");
                 BufferedReader bf = new BufferedReader(new InputStreamReader(input, "UTF-8"))) {
 
             String linea;

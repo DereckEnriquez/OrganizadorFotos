@@ -56,7 +56,7 @@ public class FormularioEliminarPersonaController<E> implements Initializable {
     @FXML
     private void clickcmbFotos(ActionEvent event){
         String nameFoto = (String) cmbFotos.getValue();
-        
+      
         try{
 
             String linea;
