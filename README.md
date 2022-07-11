@@ -1,5 +1,5 @@
 # OrganizadorFotos
-ProyED
+Torres - Enríquez - Villamar
 ## Requerimientos Mínimos
 ### Para que su proyecto pueda ser aceptado y calificado sobre hasta el 80% de la nota máxima, su aplicación deberá permitir:
 - Crear nuevos álbumes (especificando un nombre y descripción).
