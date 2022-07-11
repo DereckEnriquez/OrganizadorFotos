@@ -3,7 +3,6 @@ package Controlador;
 import Modelo.Album;
 import Modelo.CircularDoubleLinkedList;
 import Modelo.Foto;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,7 +20,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 
 /**
- * @author Grupo6
+ * @author G6
  */
 public class FormularioAlbumController implements Initializable {
 
@@ -30,12 +29,8 @@ public class FormularioAlbumController implements Initializable {
     @FXML
     private TextField txtDescripcionAlbum;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }
 
     //CREA UN ALBUM representado en un .txt con su nombre ingresado
@@ -67,12 +62,10 @@ public class FormularioAlbumController implements Initializable {
                 contenido.setMaxWidth(Double.MAX_VALUE);
                 contenido.add(label, 0, 0);
                 contenido.add(txtArea, 0, 1);
-
                 mensaje.getDialogPane().setExpandableContent(contenido);
                 mensaje.showAndWait();
 
             } else {
-
                 //escribir un nuevo archivo -> album
                 try {
                     String ruta = ".txt";

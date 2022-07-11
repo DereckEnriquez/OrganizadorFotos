@@ -2,26 +2,24 @@ package Modelo;
 
 import java.util.Iterator;
 import java.util.ListIterator;
-import java.util.function.Consumer;
 
 /**
  *
- * @author Danilo Torres Vera
+ * @author G6
  */
-
 public class CircularDoubleLinkedList<E> implements List<E> {
-
     private String nombreAlbum;
     private String descripcion;
     private Node<E> last;
     private int tam;
 
     public Iterator<E> iterator() {
-        Iterator<E> iter = new Iterator<E>(){
+        Iterator<E> iter = new Iterator<E>() {
             Node<E> node = last.sig;
+
             @Override
             public boolean hasNext() {
-                return node!=null;
+                return node != null;
             }
 
             @Override
@@ -30,126 +28,118 @@ public class CircularDoubleLinkedList<E> implements List<E> {
                 node = node.sig;
                 return temp;
             }
-        
+
         };
         return iter;
     }
 
-    public ListIterator<E> listIterator(){
+    public ListIterator<E> listIterator() {
         return listIterator(0);
     }
 
-    public ListIterator<E> listIterator(int index)
-    {
-        if(index<0 || index>=tam){
+    public ListIterator<E> listIterator(int index) {
+        if (index < 0 || index >= tam) {
             throw new IndexOutOfBoundsException("Indice fuera del limite");
         }
-   
-    ListIterator<E> list = new ListIterator<E>(){
-        private int i = index;
-        private Node<E> node = getNode(i);
-                        
-        @Override
-        public boolean hasNext() {
-            return node!=null;
-        }
 
-        @Override
-        public E next() {
-            E tmp = node.datos;
-            node = node.sig;
-            if(i==tam -1) {
-                i=0;
-            }
-            else {
-                i++;
-            }
-            return tmp;
-        }
+        ListIterator<E> list = new ListIterator<E>() {
+            private int i = index;
+            private Node<E> node = getNode(i);
 
-        @Override
-        public boolean hasPrevious() {
-            return node!=null;
-        }
-
-        @Override
-        public E previous() {
-            E tmp = node.datos;
-            node = node.ant;
-            if(i==0) {
-                i=tam -1;
+            @Override
+            public boolean hasNext() {
+                return node != null;
             }
-            else{
-                i--;
-            }
-            return tmp;
-        }
 
-        @Override
-        public int nextIndex() {
-            if(!isEmpty()){
-                if(i==tam -1) {
-                    return i=0;
+            @Override
+            public E next() {
+                E tmp = node.datos;
+                node = node.sig;
+                if (i == tam - 1) {
+                    i = 0;
+                } else {
+                    i++;
                 }
-                else {
-                    return i+1;
-                }   
+                return tmp;
             }
-            return -1;
-        }
 
-        @Override
-        public int previousIndex() {
-            if(hasPrevious()) {
-                if(i==0) {
-                    return i=tam -1;
+            @Override
+            public boolean hasPrevious() {
+                return node != null;
+            }
+
+            @Override
+            public E previous() {
+                E tmp = node.datos;
+                node = node.ant;
+                if (i == 0) {
+                    i = tam - 1;
+                } else {
+                    i--;
                 }
-                else {
-                    return i-1;
+                return tmp;
+            }
+
+            @Override
+            public int nextIndex() {
+                if (!isEmpty()) {
+                    if (i == tam - 1) {
+                        return i = 0;
+                    } else {
+                        return i + 1;
+                    }
+                }
+                return -1;
+            }
+
+            @Override
+            public int previousIndex() {
+                if (hasPrevious()) {
+                    if (i == 0) {
+                        return i = tam - 1;
+                    } else {
+                        return i - 1;
+                    }
+                }
+                return -1;
+            }
+
+            @Override
+            public void remove() {
+                if (i == 0) {
+                    removeFirst();
+                } else if (i == tam - 1) {
+                    removeLast();
+                } else {
+                    Node<E> node = getNode(i - 1);
+                    Node<E> nRemover = node.sig;
+                    Node<E> siguiente = nRemover.sig;
+                    nRemover.datos = null;
+                    nRemover.sig = nRemover.ant = null;
+                    node.sig = siguiente;
+                    siguiente.ant = node;
+                    tam--;
                 }
             }
-            return -1;
-        }
 
-        @Override
-        public void remove() {
-            if(i==0)  {
-                removeFirst();
+            @Override
+            public void set(E arg0) {
+                if (arg0 == null) {
+                    throw new NullPointerException();
+                } else {
+                    Node<E> node = getNode(i);
+                    node.datos = arg0;
+                }
             }
-            else if(i == tam-1)  {
-                removeLast();
-            }
-            else{
-                Node<E> node = getNode(i-1);
-                Node<E> nRemover = node.sig;
-                Node<E> siguiente = nRemover.sig;
-                nRemover.datos = null; 
-                nRemover.sig = nRemover.ant = null;
-                node.sig = siguiente;
-                siguiente.ant = node;
-                tam --;
-            }
-        }
 
-        @Override
-        public void set(E arg0) {
-            if(arg0==null) {
-                throw new NullPointerException();
+            @Override
+            public void add(E arg0) {
+                insert(i, arg0);
             }
-            else{
-                Node<E> node = getNode(i);
-                node.datos=arg0;
-            }
-        }
+        };
+        return list;
+    }
 
-        @Override
-        public void add(E arg0) {
-            insert(i,arg0);
-        }            
-    };
-    return list;
-}
-    
     private class Node<E> {
 
         private E datos;
@@ -178,7 +168,7 @@ public class CircularDoubleLinkedList<E> implements List<E> {
     public CircularDoubleLinkedList(String nombreAlbum, String descripcion) {
         this.nombreAlbum = nombreAlbum;
         this.descripcion = descripcion;
-        tam=this.tam;
+        tam = this.tam;
     }
 
     public String getDescripcion() {
@@ -188,7 +178,6 @@ public class CircularDoubleLinkedList<E> implements List<E> {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
 
     public String getNombreAlbum() {
         return nombreAlbum;
@@ -197,8 +186,6 @@ public class CircularDoubleLinkedList<E> implements List<E> {
     public void setNombreAlbum(String nombreAlbum) {
         this.nombreAlbum = nombreAlbum;
     }
-    
-   
 
     @Override
     public boolean addFirst(E e) {

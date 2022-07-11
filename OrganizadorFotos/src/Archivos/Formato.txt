@@ -1,9 +1,6 @@
 Archivo biblioteca.txt -> contiene todas las fotos importadas a la aplicacion
-nombrefoto,nombre album que pertenece,descripcion,lugar,fecha,LIST personas,ruta
-
 
 Archivo Nalbums.txt -> se debe generar un archivo por cada album que va contener las fotos
-nombrefoto,nombre album que pertenece,descripcion,lugar,fecha,LIST personas,ruta
 
 Archivo albums.txt -> guarda nombre y descripcion de cada album creado
 nombre album, descripcion

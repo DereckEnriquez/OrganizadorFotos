@@ -19,7 +19,7 @@ import javafx.scene.control.ComboBox;
 /**
  * FXML Controller class
  *
- * @author Dereck Enríquez
+ * @author G6
  */
 public class FormularioEliminarAlbumController implements Initializable {
 
@@ -36,27 +36,22 @@ public class FormularioEliminarAlbumController implements Initializable {
     private void btnEliminarAlbum(ActionEvent event) throws IOException {
         String albumSeleccionado = this.cbAlbum.getValue();
         File archivo = new File(albumSeleccionado + ".txt");
-        removeLineFromFile("albunes.txt",albumSeleccionado);
+        removeLineFromFile("albunes.txt", albumSeleccionado);
         archivo.delete();
-        FileCopy("albunestemp.txt","albunes.txt");
-
+        FileCopy("albunestemp.txt", "albunes.txt");
     }
 
     public void FileCopy(String sourceFile, String destinationFile) throws FileNotFoundException, IOException {
         System.out.println("Desde: " + sourceFile);
         System.out.println("Hacia: " + destinationFile);
-
         File inFile = new File(sourceFile);
         File outFile = new File(destinationFile);
-
         FileInputStream in = new FileInputStream(inFile);
         FileOutputStream out = new FileOutputStream(outFile);
-
         int c;
         while ((c = in.read()) != -1) {
             out.write(c);
         }
-
         in.close();
         out.close();
         File archivo = new File("albunestemp.txt");
@@ -86,7 +81,7 @@ public class FormularioEliminarAlbumController implements Initializable {
         }
         pw.close();
         br.close();
-        }
+    }
 
     @FXML
     private void btnsalir(ActionEvent event) throws IOException {

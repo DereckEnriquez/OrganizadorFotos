@@ -20,7 +20,7 @@ import javafx.scene.image.ImageView;
 /**
  * FXML Controller class
  *
- * @author Dereck Enríquez
+ * @author G6
  */
 public class FormularioEliminarFotoController implements Initializable {
 
@@ -31,9 +31,6 @@ public class FormularioEliminarFotoController implements Initializable {
     @FXML
     private ComboBox<String> cbFoto;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         llenarComboBoxAlbum();
@@ -44,27 +41,21 @@ public class FormularioEliminarFotoController implements Initializable {
     private void btnEliminarFoto(ActionEvent event) throws IOException {
         String albumSeleccionado = this.cbAlbum.getValue();
         String fotoSeleccionado = this.cbFoto.getValue();
-
         removeLineFromFile(albumSeleccionado + ".txt", fotoSeleccionado);
-
         FileCopy("fototemp.txt", albumSeleccionado + ".txt");
     }
 
     public void FileCopy(String sourceFile, String destinationFile) throws FileNotFoundException, IOException {
         System.out.println("Desde: " + sourceFile);
         System.out.println("Hacia: " + destinationFile);
-
         File inFile = new File(sourceFile);
         File outFile = new File(destinationFile);
-
         FileInputStream in = new FileInputStream(inFile);
         FileOutputStream out = new FileOutputStream(outFile);
-
         int c;
         while ((c = in.read()) != -1) {
             out.write(c);
         }
-
         in.close();
         out.close();
         File archivo = new File("fototemp.txt");
@@ -125,7 +116,7 @@ public class FormularioEliminarFotoController implements Initializable {
         BufferedReader br = null;
         try {
             String nombrealbum = this.cbAlbum.getValue();
-           // archivo = new File("pruebaeliminar.txt");
+            // archivo = new File("pruebaeliminar.txt");
             archivo = new File(nombrealbum + ".txt");
             fr = new FileReader(archivo);
             br = new BufferedReader(fr);

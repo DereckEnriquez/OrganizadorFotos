@@ -17,7 +17,7 @@ import javafx.scene.control.ComboBox;
 /**
  * FXML Controller class
  *
- * @author jeanf
+ * @author G6
  */
 public class FormularioEliminarPersonaController<E> implements Initializable {
 
@@ -25,81 +25,69 @@ public class FormularioEliminarPersonaController<E> implements Initializable {
     private ComboBox<E> cmbFotos;
     @FXML
     private ComboBox<E> cmbPersonas;
-    
-    private  ObservableList<String> fotos;
-    private  ObservableList<String> personas;
+
+    private ObservableList<String> fotos;
+    private ObservableList<String> personas;
     @FXML
     private Button btnEliminarPerson;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        try{
+
+        try {
             String linea;
             fotos = FXCollections.observableArrayList();
             File file = new File("Biblioteca.txt");
-            Scanner scan = new Scanner(file);            
-            String fl = "";           
-            while(scan.hasNextLine()){
+            Scanner scan = new Scanner(file);
+            String fl = "";
+            while (scan.hasNextLine()) {
                 String temp = "";
                 temp = fl.concat(scan.nextLine().split(",")[0]);
                 fotos.add(temp);
             }
-           cmbFotos.setItems((ObservableList<E>) fotos);
-           
+            cmbFotos.setItems((ObservableList<E>) fotos);
+
         } catch (Exception ex) {
             System.out.println(ex.getLocalizedMessage());
             ex.printStackTrace();
         }
-    }    
+    }
 
     @FXML
-    private void clickcmbFotos(ActionEvent event){
+    private void clickcmbFotos(ActionEvent event) {
         String nameFoto = (String) cmbFotos.getValue();
-      
-        try{
 
+        try {
             String linea;
             personas = FXCollections.observableArrayList();
-            File file = new File(nameFoto+".txt");
+            File file = new File(nameFoto + ".txt");
             Scanner scan = new Scanner(file);
-            
             String fl = "";
-            
-            while(scan.hasNextLine()){
+            while (scan.hasNextLine()) {
                 String temp = "";
                 temp = fl.concat(scan.nextLine().split(",")[0]);
                 personas.add(temp);
             }
-
             cmbPersonas.setItems((ObservableList<E>) personas);
-
-            
         } catch (Exception ex) {
             System.out.println("NO EXISTE");
-            //ex.printStackTrace();
+            ex.printStackTrace();
         }
-        
-        
     }
 
     @FXML
     private void clickEliminarPersona(ActionEvent event) throws IOException {
-        File file=new File((String) cmbFotos.getValue()+".txt");
-        Scanner scan=new Scanner(file);
-        String fileContent="";
-        while(scan.hasNextLine()){
+        File file = new File((String) cmbFotos.getValue() + ".txt");
+        Scanner scan = new Scanner(file);
+        String fileContent = "";
+        while (scan.hasNextLine()) {
             String[] extracto = scan.nextLine().split(",");
-            if(!extracto[0].equalsIgnoreCase((String) cmbPersonas.getValue())){
-                fileContent=fileContent.concat(extracto[0]+","+extracto[1]+"\n");                
+            if (!extracto[0].equalsIgnoreCase((String) cmbPersonas.getValue())) {
+                fileContent = fileContent.concat(extracto[0] + "," + extracto[1] + "\n");
             }
-            
-            
         }
-        FileWriter writer=new FileWriter((String) cmbFotos.getValue()+".txt");
+        FileWriter writer = new FileWriter((String) cmbFotos.getValue() + ".txt");
         writer.write(fileContent);
         writer.close();
-        
     }
-    
 }

@@ -23,7 +23,7 @@ import javafx.scene.paint.Color;
 /**
  * FXML Controller class
  *
- * @author familia torres vera
+ * @author G6
  */
 public class MostrarFotosAlbumController implements Initializable {
 
@@ -39,7 +39,6 @@ public class MostrarFotosAlbumController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         showName();
         mostrar();
     }
@@ -49,17 +48,14 @@ public class MostrarFotosAlbumController implements Initializable {
         Main.setRoot("/Vista/Ventana");
     }
 
-    private Pane createBookView(String titulo,String descripcion,String foto) throws FileNotFoundException {
-
+    private Pane createBookView(String titulo, String descripcion, String foto) throws FileNotFoundException {
         VBox vbox = new VBox();
         FileInputStream f = new FileInputStream(foto);
         final Image image = new Image(f, 150, 0, true, false);
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(150);
         imageView.setFitHeight(100);
-
         vbox.getChildren().add(imageView);
-
         Label titleLabel = new Label(titulo);
         titleLabel.setMaxWidth(150);
         vbox.getChildren().add(titleLabel);
@@ -67,7 +63,6 @@ public class MostrarFotosAlbumController implements Initializable {
         yearLabel.setTextFill(Color.web("#0000FF"));
         yearLabel.setStyle("-fx-font-weight: bold");
         vbox.getChildren().add(yearLabel);
-
         return vbox;
     }
 
@@ -75,12 +70,10 @@ public class MostrarFotosAlbumController implements Initializable {
         File archivo = null;
         FileReader fr = null;
         BufferedReader br = null;
-
         try {
             archivo = new File("tmp.txt");
             fr = new FileReader(archivo);
             br = new BufferedReader(fr);
-
             // Lectura del fichero
             String linea;
             linea = br.readLine();
@@ -94,7 +87,7 @@ public class MostrarFotosAlbumController implements Initializable {
                 String line;
                 while ((line = br2.readLine()) != null) {
                     String[] p = line.split(",");
-                    Pane bookView = createBookView(p[0],p[1],p[4]);
+                    Pane bookView = createBookView(p[0], p[1], p[4]);
                     galeria.getChildren().addAll(bookView);
                 }
             } catch (Exception ex) {
@@ -111,12 +104,10 @@ public class MostrarFotosAlbumController implements Initializable {
         File archivo = null;
         FileReader fr = null;
         BufferedReader br = null;
-
         try {
             archivo = new File("tmp.txt");
             fr = new FileReader(archivo);
             br = new BufferedReader(fr);
-
             // Lectura del fichero
             String linea;
             linea = br.readLine();
@@ -126,5 +117,4 @@ public class MostrarFotosAlbumController implements Initializable {
             e.printStackTrace();
         }
     }
-
 }

@@ -1,16 +1,10 @@
 package Modelo;
 
-import Controlador.Main;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  *
- * @author Dereck Enríquez
+ * @author G6
  */
 public class Foto {
 
@@ -18,7 +12,6 @@ public class Foto {
     String descripcion;
     String lugar;
     LocalDate fecha;
-    //lista de persona;
     String ruta;
 
     public Foto(String nombre, String descripcion, String lugar, LocalDate fecha, String ruta) {

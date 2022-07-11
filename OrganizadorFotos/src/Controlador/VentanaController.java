@@ -1,6 +1,5 @@
 package Controlador;
 
-import Modelo.Album;
 import Modelo.CircularDoubleLinkedList;
 import Modelo.Foto;
 import java.io.BufferedReader;
@@ -10,12 +9,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,7 +33,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Grupo6
+ * @author G6
  */
 public class VentanaController implements Initializable {
 
@@ -67,7 +62,6 @@ public class VentanaController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         exploradorArchivo.setInitialDirectory(new File("C:"));
         mostrar();
-
     }
 
     @FXML
@@ -96,7 +90,6 @@ public class VentanaController implements Initializable {
     }
 
     public void EscribirAlbumTxt(FileWriter fichero, PrintWriter pw, CircularDoubleLinkedList<Foto> album) {
-
         try {
             String ruta = "albunes.txt";
             File file = new File(ruta);
@@ -108,71 +101,19 @@ public class VentanaController implements Initializable {
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(album.getNombreAlbum() + "," + album.getDescripcion());
             bw.close();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
         vbTitulos.getChildren().add(new Text(album.getNombreAlbum()));
     }
 
-    // Este metodo no se pra ue es  XD att. Danilo
-    public static CircularDoubleLinkedList<Foto> leerFotos() {
-        CircularDoubleLinkedList<Foto> fotos = new CircularDoubleLinkedList<>();
-
-        try (InputStream input = Main.class.getResourceAsStream("/Archivos/biblioteca.txt");
-                BufferedReader bf = new BufferedReader(new InputStreamReader(input, "UTF-8"))) {
-
-            String linea;
-            while ((linea = bf.readLine()) != null) {
-                String[] p = linea.split(",");
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                LocalDate localDate = null;
-                localDate = LocalDate.parse(p[3], formatter);
-                Foto foto = new Foto(p[0], p[1], p[2], localDate, p[4]);
-                fotos.addFirst(foto);
-
-            }
-        } catch (Exception ex) {
-            System.out.println(ex.getLocalizedMessage());
-            ex.printStackTrace();
-        }
-        System.out.println("lista de fotos llena:" + fotos);
-        return fotos;
-    }
-    // no lo utilizo nose donde va XD att. Danilo
-
-    //album.txt es un archivo con todos los nombres de los albums 
-    public static CircularDoubleLinkedList<Album> leerAlbums() {
-        CircularDoubleLinkedList<Album> albums = new CircularDoubleLinkedList<>();
-
-        try (InputStream input = Main.class.getResourceAsStream("albunes.txt");
-                BufferedReader bf = new BufferedReader(new InputStreamReader(input, "UTF-8"))) {
-
-            String linea;
-            while ((linea = bf.readLine()) != null) {
-                String[] p = linea.split(",");
-                Album album = new Album(p[0], p[1]);
-                albums.addFirst(album);
-
-            }
-        } catch (Exception ex) {
-            System.out.println(ex.getLocalizedMessage());
-            ex.printStackTrace();
-        }
-        System.out.println("lista de albums llena:" + albums);
-        return albums;
-    }
-
     private Pane createBookView() throws FileNotFoundException {
-
         VBox vbox = new VBox();
         final Image image = new Image(Main.class.getResourceAsStream("/Archivos/album.png"), 150, 0, true, false);
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(160);
         imageView.setFitHeight(145);
-
         vbox.getChildren().add(imageView);
-
         return vbox;
     }
 
@@ -180,16 +121,13 @@ public class VentanaController implements Initializable {
         File archivo = null;
         FileReader fr = null;
         BufferedReader br = null;
-
         try {
-
             archivo = new File("albunes.txt");
             fr = new FileReader(archivo);
             br = new BufferedReader(fr);
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] p = linea.split(",");
-
                 Label titleLabel = new Label(p[0]);
                 titleLabel.setMaxWidth(150);
                 titleLabel.setAlignment(Pos.CENTER);
@@ -199,7 +137,6 @@ public class VentanaController implements Initializable {
                 bookView.getChildren().add(titleLabel);
                 titleLabel.setOnMouseClicked(event -> {
                     namee = titleLabel.getText();
-
                     try {
                         String ruta = "tmp.txt";
                         File file = new File(ruta);
@@ -227,5 +164,4 @@ public class VentanaController implements Initializable {
             ex.printStackTrace();
         }
     }
-
 }

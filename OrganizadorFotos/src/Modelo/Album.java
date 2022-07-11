@@ -7,9 +7,10 @@ import java.io.InputStreamReader;
 
 /**
  *
- * @author Dereck Enríquez
+ * @author G6
  */
-public class Album implements Comparable<CircularDoubleLinkedList>{
+public class Album implements Comparable<CircularDoubleLinkedList> {
+
     String nombre;
     String descripAlbum;
 
@@ -17,31 +18,26 @@ public class Album implements Comparable<CircularDoubleLinkedList>{
         this.nombre = nombre;
         this.descripAlbum = descripAlbum;
     }
-    
-    
+
     /*Validación, para evitar nombres repetidos
         retorna true si ya existe el nombre, falso si no existe
-    */
-    public static boolean validacionNombre(String nombre){
-            try (InputStream input = Main.class.getResourceAsStream("albunes.txt");
-            BufferedReader bf = new BufferedReader(new InputStreamReader(input, "UTF-8"))){
-                
+     */
+    public static boolean validacionNombre(String nombre) {
+        try (InputStream input = Main.class.getResourceAsStream("albunes.txt");
+                BufferedReader bf = new BufferedReader(new InputStreamReader(input, "UTF-8"))) {
             String linea;
-            while((linea = bf.readLine()) != null) {
-                String[] p = linea.split(",");     
-                
-                if((p[0].equalsIgnoreCase(nombre))){
+            while ((linea = bf.readLine()) != null) {
+                String[] p = linea.split(",");
+                if ((p[0].equalsIgnoreCase(nombre))) {
                     return true;
-                }               
+                }
             }
         } catch (Exception ex) {
             System.out.println(ex.getLocalizedMessage());
             ex.printStackTrace();
-
         }
         return false;
     }
-    
 
     @Override
     public String toString() {
@@ -68,5 +64,5 @@ public class Album implements Comparable<CircularDoubleLinkedList>{
     public int compareTo(CircularDoubleLinkedList o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
