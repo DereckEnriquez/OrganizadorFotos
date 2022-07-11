@@ -1,3 +1,2 @@
-maria,guayaquil
 juan,guayaquil
 pepe,guayaquil

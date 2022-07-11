@@ -49,7 +49,7 @@ public class MostrarFotosAlbumController implements Initializable {
         Main.setRoot("/Vista/Ventana");
     }
 
-    private Pane createBookView(String foto) throws FileNotFoundException {
+    private Pane createBookView(String titulo,String descripcion,String foto) throws FileNotFoundException {
 
         VBox vbox = new VBox();
         FileInputStream f = new FileInputStream(foto);
@@ -60,10 +60,10 @@ public class MostrarFotosAlbumController implements Initializable {
 
         vbox.getChildren().add(imageView);
 
-        Label titleLabel = new Label("imagen");
+        Label titleLabel = new Label(titulo);
         titleLabel.setMaxWidth(150);
         vbox.getChildren().add(titleLabel);
-        Label yearLabel = new Label("" + "desc ");
+        Label yearLabel = new Label(descripcion);
         yearLabel.setTextFill(Color.web("#0000FF"));
         yearLabel.setStyle("-fx-font-weight: bold");
         vbox.getChildren().add(yearLabel);
@@ -94,7 +94,7 @@ public class MostrarFotosAlbumController implements Initializable {
                 String line;
                 while ((line = br2.readLine()) != null) {
                     String[] p = line.split(",");
-                    Pane bookView = createBookView(p[4]);
+                    Pane bookView = createBookView(p[0],p[1],p[4]);
                     galeria.getChildren().addAll(bookView);
                 }
             } catch (Exception ex) {
