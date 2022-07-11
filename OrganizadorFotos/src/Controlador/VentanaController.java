@@ -18,11 +18,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
@@ -52,6 +55,11 @@ public class VentanaController implements Initializable {
     private VBox vbTitulos;
     @FXML
     private TilePane album;
+    private TextField txtFiltrarNombre;
+    @FXML
+    private ComboBox<String> cbPersona;
+    @FXML
+    private ComboBox<String> cbLugar;
 
     @FXML
     private void salirmenu(ActionEvent event) {
@@ -62,6 +70,8 @@ public class VentanaController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         exploradorArchivo.setInitialDirectory(new File("C:"));
         mostrar();
+        llenarComboBoxPersonas();
+        llenarComboBoxLugares();
     }
 
     @FXML
@@ -87,6 +97,11 @@ public class VentanaController implements Initializable {
     @FXML
     private void irFormularioEliminarPersonafxml(ActionEvent event) throws IOException {
         Main.setRoot("/Vista/FormularioEliminarPersona");
+    }
+
+    @FXML
+    private void irBusquedafmxl(ActionEvent event) throws IOException {
+        Main.setRoot("/Vista/Busqueda");
     }
 
     public void EscribirAlbumTxt(FileWriter fichero, PrintWriter pw, CircularDoubleLinkedList<Foto> album) {
@@ -163,5 +178,87 @@ public class VentanaController implements Initializable {
             System.out.println(ex.getLocalizedMessage());
             ex.printStackTrace();
         }
+    }
+
+    public void llenarComboBoxPersonas() {
+        File archivo = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+        try {
+            archivo = new File("PyL.txt");
+            fr = new FileReader(archivo);
+            br = new BufferedReader(fr);
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] p = linea.split(",");
+                cbPersona.getItems().add(p[0]);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+            ex.printStackTrace();
+        }
+
+    }
+
+    public void llenarComboBoxLugares() {
+        File archivo = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+        try {
+            String nombrePersona = this.cbPersona.getValue();
+            archivo = new File("PyL.txt");
+            fr = new FileReader(archivo);
+            br = new BufferedReader(fr);
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] p = linea.split(",");
+                cbLugar.getItems().add(p[1]);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+            ex.printStackTrace();
+        }
+    }
+
+    public void llenarComboBoxLugaresFiltrados() {
+        File archivo = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+        try {
+            String nombrePersona = this.cbPersona.getValue();
+            archivo = new File("PyL.txt");
+            fr = new FileReader(archivo);
+            br = new BufferedReader(fr);
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] p = linea.split(",");
+                if (nombrePersona.equals(p[0])) {
+                    cbLugar.getItems().add(p[1]);
+                }
+
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getLocalizedMessage());
+            ex.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    private void cbEvent(ActionEvent e) {
+        Object evt = e.getSource();
+        if (evt.equals(cbPersona)) {
+            cbLugar.getItems().removeAll(cbLugar.getItems());
+            llenarComboBoxLugaresFiltrados();
+        }
+    }
+
+    @FXML
+    private void cbLugar(ActionEvent event) {
+
+    }
+
+    @FXML
+    private void cbPersona(ActionEvent event) {
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -20,7 +21,7 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </BorderPane.margin>
          <children>
-            <Text fill="#273043" fontSmoothingType="LCD" layoutX="86.0" layoutY="61.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="ORGANIZADOR DE FOTOS" textAlignment="CENTER">
+            <Text fill="#273043" fontSmoothingType="LCD" layoutX="86.0" layoutY="33.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="ORGANIZADOR DE FOTOS" textAlignment="CENTER">
                <font>
                   <Font name="Cooper Black" size="36.0" />
                </font>
@@ -30,11 +31,14 @@
                   <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
                </opaqueInsets>
             </TilePane>
-            <Text layoutX="20.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Albunes Disponibles:">
+            <Text layoutX="20.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Albums Disponibles:">
                <font>
                   <Font name="Century Gothic" size="18.0" />
                </font>
             </Text>
+            <Text layoutX="20.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filtros:" />
+            <ComboBox fx:id="cbPersona" layoutX="61.0" layoutY="48.0" onAction="#cbEvent" prefWidth="150.0" promptText="Persona" />
+            <ComboBox fx:id="cbLugar" layoutX="221.0" layoutY="48.0" onAction="#cbLugar" prefWidth="150.0" promptText="Lugar" />
          </children></Pane>
    </center>
    <top>
@@ -43,7 +47,7 @@
           <Menu mnemonicParsing="false" text="Archivo">
             <items>
                   <MenuItem mnemonicParsing="false" onAction="#irFormularioAlbumfxml" text="Crear álbum" />
-                  <MenuItem mnemonicParsing="false" onAction="#irFormularioFotoFxml" text="Importar foto" />
+                  <MenuItem mnemonicParsing="false" onAction="#irFormularioFotoFxml" text="Importar foto..." />
                   <MenuItem mnemonicParsing="false" onAction="#salirmenu" text="Salir" />
             </items>
           </Menu>
@@ -54,9 +58,9 @@
                   <MenuItem mnemonicParsing="false" onAction="#irFormularioEliminarPersonafxml" text="Eliminar Persona" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
+          <Menu mnemonicParsing="false" text="Búsqueda">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" onAction="#irBusquedafmxl" text="Filtrar" />
             </items>
           </Menu>
         </menus>
