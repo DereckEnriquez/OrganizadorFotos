@@ -1,3 +1,2 @@
 Biblioteca,allphotos
-albumprueba1,albumprueba
-albumprueba2,asfs
+albumprueba1,prueba

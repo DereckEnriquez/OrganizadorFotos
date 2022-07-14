@@ -30,6 +30,8 @@ public class FormularioEliminarPersonaController<E> implements Initializable {
     private ObservableList<String> personas;
     @FXML
     private Button btnEliminarPerson;
+    @FXML
+    private Button btnSalir;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -89,5 +91,10 @@ public class FormularioEliminarPersonaController<E> implements Initializable {
         FileWriter writer = new FileWriter((String) cmbFotos.getValue() + ".txt");
         writer.write(fileContent);
         writer.close();
+    }
+
+    @FXML
+    private void clickSalir(ActionEvent event) throws IOException {
+        Main.setRoot("/Vista/Ventana");
     }
 }

@@ -1,3 +1,2 @@
 fotopersona,foto con persona,guayaquil,2022-07-01,C:\Users\Oscar Enrriquez\Desktop\test\foto2.jpg
 piero Hincapie,goleador,guayaquil,2022-07-01,C:\Users\Oscar Enrriquez\Desktop\test\foto1.jpg
-Prueba2,detalle Prueba2,Desconocido,2022-07-10,C:\Users\jeanf\Documents\ESPOL\Estructura de Datos\Parcial 1\PROYECTO\OrganizadorFotos\OrganizadorFotos\src\Archivos\album.png

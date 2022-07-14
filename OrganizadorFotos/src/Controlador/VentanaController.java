@@ -258,7 +258,4 @@ public class VentanaController implements Initializable {
 
     }
 
-    @FXML
-    private void cbPersona(ActionEvent event) {
-    }
 }
