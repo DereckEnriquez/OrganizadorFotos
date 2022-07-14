@@ -46,7 +46,11 @@ public class BusquedaController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        llenarComboBoxTipo();
+        try {
+            llenarComboBoxTipo();
+        } catch (IOException ex) {
+            Logger.getLogger(BusquedaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
@@ -64,7 +68,7 @@ public class BusquedaController implements Initializable {
         }
     }
 
-    public void llenarComboBoxTipo() {
+    public void llenarComboBoxTipo() throws IOException {
         mostrar();
         cbTipo.getItems().add("Albums");
         cbTipo.getItems().add("Fotos");
@@ -129,51 +133,86 @@ public class BusquedaController implements Initializable {
         return vbox;
     }
 
-    private void mostrar() {
+    private void mostrar() throws IOException {
         File archivo = null;
         FileReader fr = null;
         BufferedReader br = null;
-        try {
-            archivo = new File("albunes.txt");
-            fr = new FileReader(archivo);
-            br = new BufferedReader(fr);
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                String[] p = linea.split(",");
-                Label titleLabel = new Label(p[0]);
-                titleLabel.setMaxWidth(150);
-                titleLabel.setAlignment(Pos.CENTER);
-                titleLabel.setTextFill(Color.web("#4D5382"));
-                titleLabel.setStyle("-fx-font-size: 20");
-                Pane bookView = createBookView();
-                bookView.getChildren().add(titleLabel);
-                titleLabel.setOnMouseClicked(event -> {
-                    namee = titleLabel.getText();
-                    try {
-                        String ruta = "tmp.txt";
-                        File file = new File(ruta);
-                        // Si el archivo no existe es creado
-                        if (!file.exists()) {
-                            file.createNewFile();
-                        }
-                        FileWriter fw = new FileWriter(file);
-                        BufferedWriter bw = new BufferedWriter(fw);
-                        bw.write(namee);
-                        bw.close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
+        File archivo2 = null;
+        FileReader fr2 = null;
+        BufferedReader br2 = null;
+        File archivo3 = null;
+        FileReader fr3 = null;
+        BufferedReader br3 = null;
+
+        String personaSelec = cbPersonas.getValue();
+        String lugarSelec = cbLugares.getValue();
+
+        archivo = new File("albunes.txt");
+        fr = new FileReader(archivo);
+        br = new BufferedReader(fr);
+        String linea;
+        String albumtxt = null;
+
+        while ((linea = br.readLine()) != null) {
+            String[] p = linea.split(",");
+            albumtxt = p[0];
+
+            archivo2 = new File(albumtxt + ".txt");
+            fr2 = new FileReader(archivo2);
+            br2 = new BufferedReader(fr2);
+            String lineaalbum;
+            while ((lineaalbum = br2.readLine()) != null) {
+                String[] p2 = lineaalbum.split(",");
+                String fototxt = p2[0];
+
+                archivo3 = new File(fototxt + ".txt");
+                fr3 = new FileReader(archivo3);
+                br3 = new BufferedReader(fr3);
+                String lineafoto;
+                while ((lineafoto = br3.readLine()) != null) {
+                    String[] p3 = lineafoto.split(",");
+                    String persona = p3[0];
+                    String lugar = p3[1];
+                    if (persona.equals(personaSelec) && lugar.equals(lugarSelec)) {
+                        Label titleLabel = new Label(albumtxt);
+                        titleLabel.setMaxWidth(150);
+                        titleLabel.setMaxWidth(150);
+                        titleLabel.setAlignment(Pos.CENTER);
+                        titleLabel.setTextFill(Color.web("#4D5382"));
+                        titleLabel.setStyle("-fx-font-size: 20");
+                        Pane bookView = createBookView();
+                        bookView.getChildren().add(titleLabel);
+                        TPgaleria.getChildren().addAll(bookView);
+                        
+                        titleLabel.setOnMouseClicked(event -> {
+                            namee = titleLabel.getText();
+                            try {
+                                String ruta = "tmp.txt";
+                                File file = new File(ruta);
+                                // Si el archivo no existe es creado
+                                if (!file.exists()) {
+                                    file.createNewFile();
+                                }
+                                FileWriter fw = new FileWriter(file);
+                                BufferedWriter bw = new BufferedWriter(fw);
+                                bw.write(namee);
+                                bw.close();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            try {
+                                Main.setRoot("/Vista/MostrarFotosAlbum");
+                            } catch (IOException ex) {
+                                Logger.getLogger(VentanaController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        });
+                        TPgaleria.getChildren().addAll(bookView);
                     }
-                    try {
-                        Main.setRoot("/Vista/MostrarFotosAlbum");
-                    } catch (IOException ex) {
-                        Logger.getLogger(VentanaController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                });
-                TPgaleria.getChildren().addAll(bookView);
+
+                }
+
             }
-        } catch (Exception ex) {
-            System.out.println(ex.getLocalizedMessage());
-            ex.printStackTrace();
         }
     }
+
 }
