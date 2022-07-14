@@ -1,1 +1,3 @@
 Maria,Quito
+Jose,Desconocido
+Maria,Desconocido

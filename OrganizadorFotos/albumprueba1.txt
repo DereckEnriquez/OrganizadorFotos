@@ -1,0 +1,2 @@
+nueva,n,n,2022-07-12,C:\Users\jeanf\Pictures\gatos\gata4.jpg
+gato2,cat,casa,2022-07-07,C:\Users\jeanf\Pictures\gatos\gato2.jpg

@@ -28,6 +28,7 @@
             <ComboBox fx:id="cmbPersonas" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Button fx:id="btnEliminarPerson" layoutX="281.0" layoutY="289.0" mnemonicParsing="false" onAction="#clickEliminarPersona" text="Eliminar Persona" />
+      <Button fx:id="btnEliminarPerson" layoutX="176.0" layoutY="310.0" mnemonicParsing="false" onAction="#clickEliminarPersona" text="Eliminar Persona" />
+      <Button fx:id="btnSalir" layoutX="324.0" layoutY="309.0" mnemonicParsing="false" onAction="#clickSalir" prefHeight="26.0" prefWidth="104.0" text="Salir" />
    </children>
 </AnchorPane>
