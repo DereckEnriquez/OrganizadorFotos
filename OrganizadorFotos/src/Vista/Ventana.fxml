@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -13,7 +12,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="710.0" style="-fx-background-color: #EFF6EE;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VentanaController">
    <center>
-      <Pane id="panel" fx:id="panel" prefHeight="474.0" prefWidth="637.0" BorderPane.alignment="CENTER">
+      <Pane id="panel" fx:id="panel" prefHeight="502.0" prefWidth="670.0" BorderPane.alignment="CENTER">
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
@@ -21,19 +20,16 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </BorderPane.margin>
          <children>
-            <TilePane fx:id="album" layoutX="10.0" layoutY="46.0" prefHeight="444.0" prefWidth="650.0">
+            <TilePane fx:id="album" layoutX="10.0" layoutY="29.0" prefHeight="461.0" prefWidth="650.0">
                <opaqueInsets>
                   <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
                </opaqueInsets>
             </TilePane>
-            <Text layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Albums Disponibles:">
+            <Text layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Albums Disponibles:">
                <font>
                   <Font name="Century Gothic" size="18.0" />
                </font>
             </Text>
-            <Text layoutY="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filtros:" />
-            <ComboBox fx:id="cbPersona" layoutX="41.0" layoutY="-12.0" onAction="#cbEvent" prefWidth="150.0" promptText="Persona" />
-            <ComboBox fx:id="cbLugar" layoutX="201.0" layoutY="-12.0" onAction="#cbLugar" prefWidth="150.0" promptText="Lugar" />
          </children></Pane>
    </center>
    <top>

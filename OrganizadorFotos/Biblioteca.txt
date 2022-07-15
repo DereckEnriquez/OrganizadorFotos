@@ -1,1 +1,2 @@
-
+fotoprueba1,abc,gye,2022-07-01,C:\Users\Oscar Enrriquez\Desktop\test\foto1.jpg
+fotoprueba2,arquerazo,quevedo,2022-07-01,C:\Users\Oscar Enrriquez\Desktop\test\foto2.jpg

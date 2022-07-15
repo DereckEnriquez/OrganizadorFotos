@@ -3,6 +3,7 @@ package Controlador;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -51,83 +52,14 @@ public class BusquedaController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            llenarComboBoxTipo();
-        } catch (IOException ex) {
-            Logger.getLogger(BusquedaController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     @FXML
-    private void regresar(ActionEvent event) throws IOException {        
+    private void regresar(ActionEvent event) throws IOException {
         Main.setRoot("/Vista/Ventana");
     }
 
-    private void cbEvent(ActionEvent e) throws IOException {
-        Object evt = e.getSource();
-        if (evt.equals(cbTipo)) {
-            cbTipo.getItems().removeAll(cbTipo.getItems());
-            llenarComboBoxFiltro();
-            llenarComboBoxTipo();
-        }
-    }
-
-    public void llenarComboBoxTipo() throws IOException {
-        //mostrar();
-        cbTipo.getItems().add("Albums");
-        cbTipo.getItems().add("Fotos");
-    }
-
-    public void llenarComboBoxFiltro() throws FileNotFoundException, IOException {
-        File archivo = null;
-        FileReader fr = null;
-        BufferedReader br = null;
-        File archivo2 = null;
-        FileReader fr2 = null;
-        BufferedReader br2 = null;
-        File archivo3 = null;
-        FileReader fr3 = null;
-        BufferedReader br3 = null;
-
-        archivo = new File("albunes.txt");
-        fr = new FileReader(archivo);
-        br = new BufferedReader(fr);
-        String linea;
-
-        while ((linea = br.readLine()) != null) {
-            String[] p = linea.split(",");
-            String albumtxt = p[0];
-
-            archivo2 = new File(albumtxt + ".txt");
-            fr2 = new FileReader(archivo2);
-            br2 = new BufferedReader(fr2);
-            String lineaalbum;
-            while ((lineaalbum = br2.readLine()) != null) {
-                String[] p2 = lineaalbum.split(",");
-                String fototxt = p2[0];
-
-                archivo3 = new File(fototxt + ".txt");
-                fr3 = new FileReader(archivo3);
-                br3 = new BufferedReader(fr3);
-                String lineafoto;
-                while ((lineafoto = br3.readLine()) != null) {
-                    String[] p3 = lineafoto.split(",");
-                    String persona = p3[0];
-                    String lugar = p3[1];
-                    if (!cbPersonas.getItems().contains(persona)) {
-                        cbPersonas.getItems().add(persona);
-                    }
-
-                    if (!cbLugares.getItems().contains(lugar)) {
-                        cbLugares.getItems().add(lugar);
-                    }
-
-                }
-            }
-        }
-    }
-
-    private Pane createBookView() throws FileNotFoundException {
+    public Pane createBookView() throws FileNotFoundException {
         VBox vbox = new VBox();
         final Image image = new Image(Main.class.getResourceAsStream("/Archivos/album.png"), 150, 0, true, false);
         ImageView imageView = new ImageView(image);
@@ -137,7 +69,7 @@ public class BusquedaController implements Initializable {
         return vbox;
     }
 
-    private void mostrar() throws IOException {
+    public void mostrar() throws IOException {
         File archivo = null;
         FileReader fr = null;
         BufferedReader br = null;
@@ -187,7 +119,7 @@ public class BusquedaController implements Initializable {
                         Pane bookView = createBookView();
                         bookView.getChildren().add(titleLabel);
                         TPgaleria.getChildren().addAll(bookView);
-                        
+
                         titleLabel.setOnMouseClicked(event -> {
                             namee = titleLabel.getText();
                             try {
@@ -217,15 +149,200 @@ public class BusquedaController implements Initializable {
 
             }
         }
-    } 
-    @FXML
-    private void checkAlbun(MouseEvent event) {
-        
     }
 
     @FXML
-    private void checkFoto(MouseEvent event) {
-        
+    private void checkAlbun() throws FileNotFoundException, IOException {
+        File archivo = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+        File archivo2 = null;
+        FileReader fr2 = null;
+        BufferedReader br2 = null;
+        File archivo3 = null;
+        FileReader fr3 = null;
+        BufferedReader br3 = null;
+
+        archivo = new File("albunes.txt");
+        fr = new FileReader(archivo);
+        br = new BufferedReader(fr);
+        String linea;
+
+        while ((linea = br.readLine()) != null) {
+            String[] p = linea.split(",");
+            String albumtxt = p[0];
+
+            archivo2 = new File(albumtxt + ".txt");
+            fr2 = new FileReader(archivo2);
+            br2 = new BufferedReader(fr2);
+            String lineaalbum;
+            while ((lineaalbum = br2.readLine()) != null) {
+                String[] p2 = lineaalbum.split(",");
+                String fototxt = p2[0];
+
+                archivo3 = new File(fototxt + ".txt");
+                fr3 = new FileReader(archivo3);
+                br3 = new BufferedReader(fr3);
+                String lineafoto;
+                while ((lineafoto = br3.readLine()) != null) {
+                    String[] p3 = lineafoto.split(",");
+                    String persona = p3[0];
+                    String lugar = p3[1];
+                    if (!cbPersonas.getItems().contains(persona)) {
+                        cbPersonas.getItems().add(persona);
+                    }
+
+                    if (!cbLugares.getItems().contains(lugar)) {
+                        cbLugares.getItems().add(lugar);
+                    }
+
+                }
+            }
+            TPgaleria.getChildren().clear();
+        }
+        if (checkAlbun.isSelected()) {
+            mostrar();
+        }
     }
 
+    private Pane createBookViewFotos(String titulo, String descripcion, String foto) throws FileNotFoundException {
+        VBox vbox = new VBox();
+        FileInputStream f = new FileInputStream(foto);
+        final Image image = new Image(f, 150, 0, true, false);
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(150);
+        imageView.setFitHeight(100);
+        vbox.getChildren().add(imageView);
+        Label titleLabel = new Label(titulo);
+        titleLabel.setMaxWidth(150);
+        vbox.getChildren().add(titleLabel);
+        Label descrip = new Label(descripcion);
+        descrip.setTextFill(Color.web("#0000FF"));
+        descrip.setStyle("-fx-font-weight: bold");
+        vbox.getChildren().add(descrip);
+        return vbox;
+    }
+
+    private void mostrarFotos() throws FileNotFoundException, IOException {
+        File archivo = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+        File archivo2 = null;
+        FileReader fr2 = null;
+        BufferedReader br2 = null;
+        File archivo3 = null;
+        FileReader fr3 = null;
+        BufferedReader br3 = null;
+        File archivo4 = null;
+        FileReader fr4 = null;
+        BufferedReader br4 = null;
+        File archivo5 = null;
+        FileReader fr5 = null;
+        BufferedReader br5 = null;
+
+        String personaSelec = cbPersonas.getValue();
+        String lugarSelec = cbLugares.getValue();
+
+        archivo = new File("albunes.txt");
+        fr = new FileReader(archivo);
+        br = new BufferedReader(fr);
+        String linea;
+        String albumtxt = null;
+        String fototxt = null;
+
+        while ((linea = br.readLine()) != null) {
+            String[] p = linea.split(",");
+            albumtxt = p[0];
+
+            archivo2 = new File(albumtxt + ".txt");
+            fr2 = new FileReader(archivo2);
+            br2 = new BufferedReader(fr2);
+            String lineaalbum;
+            while ((lineaalbum = br2.readLine()) != null) {
+                String[] p2 = lineaalbum.split(",");
+                fototxt = p2[0];
+
+                archivo3 = new File(fototxt + ".txt");
+                fr3 = new FileReader(archivo3);
+                br3 = new BufferedReader(fr3);
+                String lineafoto;
+                while ((lineafoto = br3.readLine()) != null) {
+                    String[] p3 = lineafoto.split(",");
+                    String persona = p3[0];
+                    String lugar = p3[1];
+
+            
+                        archivo5 = new File(albumtxt + ".txt");
+                        fr5 = new FileReader(archivo5);
+                        br5 = new BufferedReader(fr5);
+                        String line;
+                        while ((line = br5.readLine()) != null) {
+
+                            String[] p4 = line.split(",");
+                            String lugarfx = p4[2];
+                            if (lugarfx.equals(lugarSelec)&& persona.equals(personaSelec)) {
+                            Pane bookView = createBookViewFotos(p4[0], p4[1], p4[4]);
+                            TPgaleria.getChildren().addAll(bookView);
+                        }
+                    }
+                }//eliminar archivo tmp
+                archivo.delete();
+
+            }
+        }
+    }
+
+    @FXML
+    private void checkFoto(MouseEvent event) throws FileNotFoundException, IOException {
+        File archivo = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+        File archivo2 = null;
+        FileReader fr2 = null;
+        BufferedReader br2 = null;
+        File archivo3 = null;
+        FileReader fr3 = null;
+        BufferedReader br3 = null;
+
+        archivo = new File("albunes.txt");
+        fr = new FileReader(archivo);
+        br = new BufferedReader(fr);
+        String linea;
+
+        while ((linea = br.readLine()) != null) {
+            String[] p = linea.split(",");
+            String albumtxt = p[0];
+
+            archivo2 = new File(albumtxt + ".txt");
+            fr2 = new FileReader(archivo2);
+            br2 = new BufferedReader(fr2);
+            String lineaalbum;
+            while ((lineaalbum = br2.readLine()) != null) {
+                String[] p2 = lineaalbum.split(",");
+                String fototxt = p2[0];
+
+                archivo3 = new File(fototxt + ".txt");
+                fr3 = new FileReader(archivo3);
+                br3 = new BufferedReader(fr3);
+                String lineafoto;
+                while ((lineafoto = br3.readLine()) != null) {
+                    String[] p3 = lineafoto.split(",");
+                    String persona = p3[0];
+                    String lugar = p3[1];
+                    if (!cbPersonas.getItems().contains(persona)) {
+                        cbPersonas.getItems().add(persona);
+                    }
+
+                    if (!cbLugares.getItems().contains(lugar)) {
+                        cbLugares.getItems().add(lugar);
+                    }
+
+                }
+            }
+            TPgaleria.getChildren().clear();
+        }
+        if (checkFoto.isSelected()) {
+            mostrarFotos();
+        }
+    }
 }
