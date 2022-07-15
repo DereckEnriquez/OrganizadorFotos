@@ -59,10 +59,10 @@ public class MostrarFotosAlbumController implements Initializable {
         Label titleLabel = new Label(titulo);
         titleLabel.setMaxWidth(150);
         vbox.getChildren().add(titleLabel);
-        Label yearLabel = new Label(descripcion);
-        yearLabel.setTextFill(Color.web("#0000FF"));
-        yearLabel.setStyle("-fx-font-weight: bold");
-        vbox.getChildren().add(yearLabel);
+        Label descrip = new Label(descripcion);
+        descrip.setTextFill(Color.web("#0000FF"));
+        descrip.setStyle("-fx-font-weight: bold");
+        vbox.getChildren().add(descrip);
         return vbox;
     }
 
@@ -99,7 +99,8 @@ public class MostrarFotosAlbumController implements Initializable {
             e.printStackTrace();
         }
     }
-
+    
+    // metodo para mostrar el nombre del album
     private void showName() {
         File archivo = null;
         FileReader fr = null;

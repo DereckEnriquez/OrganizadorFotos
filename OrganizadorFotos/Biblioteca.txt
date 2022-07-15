@@ -1,2 +1,1 @@
-fotopersona,foto con persona,guayaquil,2022-07-01,C:\Users\Oscar Enrriquez\Desktop\test\foto2.jpg
-piero Hincapie,goleador,guayaquil,2022-07-01,C:\Users\Oscar Enrriquez\Desktop\test\foto1.jpg
+

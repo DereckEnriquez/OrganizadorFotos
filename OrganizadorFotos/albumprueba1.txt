@@ -1,2 +1,0 @@
-fotoprueba1,abc,quevedo,2022-07-01,C:\Users\Oscar Enrriquez\Desktop\test\foto2.jpg
-fotoprueba2,ppp,duran,2022-07-08,C:\Users\Oscar Enrriquez\Desktop\test\foto1.jpg

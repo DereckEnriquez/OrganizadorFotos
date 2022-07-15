@@ -15,10 +15,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
@@ -33,13 +35,16 @@ public class BusquedaController implements Initializable {
 
     @FXML
     private ComboBox<String> cbPersonas;
-    @FXML
     private ComboBox<String> cbTipo;
     @FXML
     private ComboBox<String> cbLugares;
     @FXML
     private TilePane TPgaleria;
     private String namee = null;
+    @FXML
+    private CheckBox checkAlbun;
+    @FXML
+    private CheckBox checkFoto;
 
     /**
      * Initializes the controller class.
@@ -54,11 +59,10 @@ public class BusquedaController implements Initializable {
     }
 
     @FXML
-    private void regresar(ActionEvent event) throws IOException {
+    private void regresar(ActionEvent event) throws IOException {        
         Main.setRoot("/Vista/Ventana");
     }
 
-    @FXML
     private void cbEvent(ActionEvent e) throws IOException {
         Object evt = e.getSource();
         if (evt.equals(cbTipo)) {
@@ -69,7 +73,7 @@ public class BusquedaController implements Initializable {
     }
 
     public void llenarComboBoxTipo() throws IOException {
-        mostrar();
+        //mostrar();
         cbTipo.getItems().add("Albums");
         cbTipo.getItems().add("Fotos");
     }
@@ -213,6 +217,15 @@ public class BusquedaController implements Initializable {
 
             }
         }
+    } 
+    @FXML
+    private void checkAlbun(MouseEvent event) {
+        
+    }
+
+    @FXML
+    private void checkFoto(MouseEvent event) {
+        
     }
 
 }
