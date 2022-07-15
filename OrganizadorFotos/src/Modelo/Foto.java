@@ -27,6 +27,9 @@ public class Foto {
         this.lugar = lugar;        
         this.ruta = ruta;
     }
+    public Foto (String ruta){
+        this.ruta = ruta;
+    }
 
     public Foto() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
