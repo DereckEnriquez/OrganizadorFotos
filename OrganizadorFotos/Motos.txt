@@ -1,0 +1,3 @@
+Moto1,moto,here,2022-07-14,C:\Users\icesajmsol\Downloads\Fotos Proyecto\moto1.jpg
+Moto2,moto,here,2022-07-14,C:\Users\icesajmsol\Downloads\Fotos Proyecto\moto2.jpg
+Moto3,moto,here,2022-07-14,C:\Users\icesajmsol\Downloads\Fotos Proyecto\moto3.jpg

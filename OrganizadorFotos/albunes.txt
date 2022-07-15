@@ -1,1 +1,3 @@
 Biblioteca,allphotos
+Autos,Fotos de Autos
+Motos,Fotos de Motos

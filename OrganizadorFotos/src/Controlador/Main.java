@@ -21,7 +21,7 @@ public class Main extends Application {
     // Metodos para salatar de escena setRoot
     @Override
     public void start(Stage stage) throws Exception {
-        scene = new Scene(loadFXML("/Vista/FormularioLogin"));
+        scene = new Scene(loadFXML("/Vista/Ventana"));
         stage.setTitle("Albums");
         stage.setScene(scene);
         stage.show();

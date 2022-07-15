@@ -1,13 +1,17 @@
 package Controlador;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -26,6 +30,8 @@ import javafx.scene.paint.Color;
  * @author G6
  */
 public class MostrarFotosAlbumController implements Initializable {
+    
+    public String namee = null;
 
     @FXML
     private TilePane galeria;
@@ -59,6 +65,25 @@ public class MostrarFotosAlbumController implements Initializable {
         Label titleLabel = new Label(titulo);
         titleLabel.setMaxWidth(150);
         vbox.getChildren().add(titleLabel);
+        
+        imageView.setOnMouseClicked(event -> {
+                    namee = titleLabel.getText();                    
+                    try {
+                        Main.setRoot("/Vista/MostrarFotos");
+                    } catch (IOException ex) {
+                        Logger.getLogger(VentanaController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                });
+        
+        titleLabel.setOnMouseClicked(event -> {
+                    namee = titleLabel.getText();                    
+                    try {
+                        Main.setRoot("/Vista/MostrarFotos");
+                    } catch (IOException ex) {
+                        Logger.getLogger(VentanaController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                });                
+        
         Label descrip = new Label(descripcion);
         descrip.setTextFill(Color.web("#0000FF"));
         descrip.setStyle("-fx-font-weight: bold");

@@ -21,6 +21,16 @@ public class Foto {
         this.fecha = fecha;
         this.ruta = ruta;
     }
+    public Foto(String nombre, String descripcion, String lugar, String ruta) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.lugar = lugar;        
+        this.ruta = ruta;
+    }
+
+    public Foto() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     public String getNombre() {
         return nombre;
